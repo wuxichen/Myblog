@@ -2,22 +2,40 @@
 layout: default
 ---
 
-<div class="home">
+<div class ="container">
 
-  <h1 class="page-heading">Posts</h1>
+</div>
 
-  <ul class="post-list">
+<div class="recent-posts">
+  <h1>Recent Posts</h1>
+
+    
+    <ul class="homepage-posts most-recent">
     {% for post in site.posts %}
       <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <span class="post-meta pull-right">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-        <h2>
+        <h4>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+        </h4>
       </li>
     {% endfor %}
   </ul>
+    
+<!--    <ul class="homepage-posts most-recent">
+    <li><span><h4><a href="{{ site.baseurl }}/jekyll/testing/2013/12/08/What-is-this-anyway.html">What is this, anyway?</a>&nbsp;<span class="badge"><smaller>FRESH</smaller></span><time class="pull-right">08 Dec 2013</h4></time></span></h4></span></li>
+    </ul>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
-</div>
+    <ul class="homepage-posts">
+ 	  <li><span><h4><a href="{{ site.baseurl }}/2013/12/04/Samples.html">Samples</a><time class="pull-right">04 Dec 2013</h4></time></span></h4></span></li>
+    </ul>
+
+    <ul class="homepage-posts">
+ 	  <li><span><h4><a href="{{ site.baseurl }}/jekyll/update/2013/11/08/welcome-to-jekyll.html">Welcome to Jekyll!</a><time class="pull-right">08 Nov 2013</h4></time></span></h4></span></li>
+    </ul>
+-->
+    <ul>
+      <a href="{{ site.baseurl }}/list.html">View More...</a>
+</ul>
+  	</div>

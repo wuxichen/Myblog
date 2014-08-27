@@ -1,16 +1,46 @@
 ---
-title: Category list
+title: 分类文章
 ---
 {% include header.html %}
 
-<div class="container">
-  <div id="article">
-  <h1>{{ page.category }}</h1>
+{% if page.category == 'reading' %}
+
+    <div class="container">
+    
+    </div>
+    <div class="reading-container">
+	   <h1>读书笔记</h1>
+	   <p>Some of books I've read recently.</p>
+	   <br>
+        <center>
+	    <a href="#"><span class="label label-danger">Programming</span></a>
+        <a href="#"><span class="label label-danger light">Algorithm</span></a>
+	    <a href="#"><span class="label label-danger light">Design</span></a>
+        </center>
+    </div>
+    <div class="container">
+        <div id="article">
+        <br>
+{% else %}
+            
+    <div class="container">
+        <div id="article">
+        <h1>
+        {% if site.[page.category] %}
+            {{ site.[page.category] }} 
+        {% else %}
+            {{ page.category }} 
+        {% endif %}
+        </h1>
+            <div class="previous"><a href="{{ site.baseurl }}/list.html">&larr; 返回</a></div>
+        <hr/>
+{% endif %}
+
   <ul class="posts">
     {% for post in site.categories.[page.category] %}
     <li><span>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        <time class="pull-right post-list">{{ post.date | date_to_string | date: "%b %-d, %Y"  }}</h4></time>
+        <time class="pull-right post-list" style="font-size:14px">{{ post.date | date_to_string | date: "%b %-d, %Y"  }}</h4></time>
       </span></span></li>
     {% endfor %}
   </ul>

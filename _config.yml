@@ -3,8 +3,7 @@ title: Gray's Blog
 name: Gray's Blog
 email: wxc422@mail.ustc.edu.cn
 description: > # this means to ignore newlines until "baseurl:"
-    我的博客，欢迎光临！
-    Hi! I'm Gray, a master candidate in ustc. It's my blog and posts here are works or readings I do recently.
+    这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
 baseurl: "/Myblog" # the subpath of your site, e.g. /blog/
 url: "http://wuxichen.github.io" # the base hostname & protocol for your site
 safe: false
@@ -17,3 +16,7 @@ weibo: http://weibo.com/xgray
 # Build settings
 markdown: redcarpet
 highlighter: pygments
+
+# Global Variables
+backup: 备忘速查
+reading: 读书笔记

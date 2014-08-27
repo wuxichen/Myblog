@@ -2,7 +2,7 @@
 title: What is this, anyway?
 layout: post
 date: 2013-12-08 19:55:16
-category: jekyll
+
 ---
 
 

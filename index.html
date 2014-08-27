@@ -7,34 +7,26 @@ layout: default
 </div>
 
 <div class="recent-posts">
-  <h1>Recent Posts</h1>
+  <h1>最近文章</h1>
 
     
     <ul class="homepage-posts most-recent">
-    {% for post in site.posts %}
+    {% for post in site.posts limit: 10 %}
       <li>
         <span class="post-meta pull-right">{{ post.date | date: "%b %-d, %Y" }}</span>
 
         <h4>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h4>
+          <p>
+              {{ post.content | truncate: 300 | escape }}
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
       </li>
     {% endfor %}
   </ul>
     
-<!--    <ul class="homepage-posts most-recent">
-    <li><span><h4><a href="{{ site.baseurl }}/jekyll/testing/2013/12/08/What-is-this-anyway.html">What is this, anyway?</a>&nbsp;<span class="badge"><smaller>FRESH</smaller></span><time class="pull-right">08 Dec 2013</h4></time></span></h4></span></li>
-    </ul>
-
-
-    <ul class="homepage-posts">
- 	  <li><span><h4><a href="{{ site.baseurl }}/2013/12/04/Samples.html">Samples</a><time class="pull-right">04 Dec 2013</h4></time></span></h4></span></li>
-    </ul>
-
-    <ul class="homepage-posts">
- 	  <li><span><h4><a href="{{ site.baseurl }}/jekyll/update/2013/11/08/welcome-to-jekyll.html">Welcome to Jekyll!</a><time class="pull-right">08 Nov 2013</h4></time></span></h4></span></li>
-    </ul>
--->
     <ul>
       <a href="{{ site.baseurl }}/list.html">View More...</a>
 </ul>

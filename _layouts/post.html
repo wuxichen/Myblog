@@ -2,7 +2,8 @@
 
   <div id="article">
    <div class="article-title normalfont">{{ page.title }}</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> {{ page.date | date_to_string}}</small></p> <hr/>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> {{ page.date | date_to_string}}</small>
+       <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
    <div class="post">
      {{ content }}
    </div>
@@ -14,10 +15,10 @@
 
  <ul class="pager">
   {% if page.previous %}
-  <li class="previous"><a href="{{ page.previous.url }}">&larr; Older</a></li>
+  <li class="previous"><a href="{{ site.baseurl }}{{ page.previous.url }}">&larr; Older</a></li>
   {% endif %}
   {% if page.next %}
-  <li class="next"><a href="{{ page.next.url }}">Newer &rarr;</a></li>
+  <li class="next"><a href="{{ site.baseurl }}{{ page.next.url }}">Newer &rarr;</a></li>
   {% endif %}
 
 </ul>

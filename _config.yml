@@ -20,3 +20,6 @@ highlighter: pygments
 # Global Variables
 backup: 备忘速查
 reading: 读书笔记
+htmlcss: 前端开发
+timeseries: 时间序列分析
+php: PHP

@@ -92,9 +92,44 @@ code {
 li{
     font-family: 'SourceHanSansCN-Normal';
       font-size: 16px;
-      line-height: 24px;
+      line-height: 30px;
 }
 
+.redfont{
+    color: #d90006;
+}
+
+.grayfont{
+    color: #7c7c7c;
+}
+
+.label-back
+{
+    background-color:#fff;    /*#6eb7e5;*/
+    border: 1px solid #6eb7e5;
+    font-family: 'SourceHanSansCN-Light';
+    border-radius:.2em;
+    font-size:100%;
+    float:right;
+}
+
+.label-back a:link
+{
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.label-back a:hover
+{
+    color: #fff;
+}
+
+.label-back:hover
+{
+    background-color:#4c8dba;
+    transition:all .4s ease 0;
+    text-decoration:none;
+}
 
 /* ---------------------------------------------- */
 
@@ -146,7 +181,7 @@ p
   /*font-family:"Helvetica Neue", helvetica, "Open Sans", sans-serif;*/
     font-family: 'SourceHanSansCN-Normal';
   font-size: 16px;
-      line-height: 24px;
+      line-height: 30px;
 }
 
 .posts
@@ -154,7 +189,7 @@ p
   font-size:20px;
   list-style:none;
   font-weight:lighter;
-  line-height:250%;
+  line-height:40px;
   padding-bottom:30px
 }
 
@@ -320,7 +355,7 @@ blockquote
   margin-left:-40px;
   margin-right:-40px;
   padding-left:40px;
-  background: #fff
+  background: #f9f9f9;
 }
 
 ul,ol
@@ -497,7 +532,7 @@ img
 #article
 {
   margin-bottom:30px;
-  background-color:#f9f9f9;
+  background-color:#ffffff;
   box-shadow:1px 1px 0 1px #e8e8e8;
   padding:10px 40px 0
 }

@@ -55,7 +55,7 @@
         Gray's Blog
         <br>
         
-        <span class="badge lazy"><smaller>FRESHLY MINTED</smaller></span><br><span style="font-size:24px;">Eclipse 常用快捷键</span><br><a href="/Myblog/backup/2014/09/02/eclipsekeys.html"><button type="button" class="btn btn-default showcase-button">Read More</button></a>
+        <span class="badge lazy"><smaller>FRESHLY MINTED</smaller></span><br><span style="font-size:24px;">Jekyll搭建过程中的Git命令</span><br><a href="/Myblog/backup/2014/09/04/git-jekyll.html"><button type="button" class="btn btn-default showcase-button">Read More</button></a>
         
     </div>
 </div>
@@ -71,6 +71,31 @@
 
     
     <ul class="homepage-posts most-recent">
+    
+      <li>
+        <span class="post-meta pull-right">Sep 4, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/backup/2014/09/04/git-jekyll.html">Jekyll搭建过程中的Git命令</a>
+        </h4>
+          <p>
+              &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;搭建环境，推送至Github&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+&lt;li&gt;创建Jekyll的新目录 &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;初始化：&lt;code&gt;git init&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;创建分支gh-pages：&lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;提交到本地git库中： &lt;br&gt;
+&lt;code&gt;git add --all . &lt;br&gt;
+git commit  -m &amp;quot;first post&amp;quot;&lt;/co...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
     
       <li>
         <span class="post-meta pull-right">Sep 2, 2014</span>
@@ -184,27 +209,6 @@
       </li>
     
       <li>
-        <span class="post-meta pull-right">Aug 28, 2014</span>
-
-        <h4>
-          <a class="post-link" href="/Myblog/backup/2014/08/28/git-jekyll.html">Jekyll搭建过程中的Git命令</a>
-        </h4>
-          <p>
-              &lt;p&gt;
-1. 创建Jekyll的新目录 &lt;br&gt;
-2. 初始化：&lt;code&gt;git init&lt;/code&gt; &lt;br&gt;
-3. 创建分支gh-pages：&lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; &lt;br&gt;
-4. 提交到本地git库中： &lt;br&gt;
-&lt;code&gt;git add --all . &lt;br&gt;
- git commit  -m &quot;first post&quot;&lt;/code&gt; &lt;br&gt;
-5. 到github上建同名库“Myblog”：&lt;br&gt; 
-&lt;code&gt;git remote add myblog(新的仓库名) https://github.com/(...
-          </p>
-          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
-          
-      </li>
-    
-      <li>
         <span class="post-meta pull-right">Aug 25, 2014</span>
 
         <h4>
@@ -284,7 +288,7 @@
   	</div>
 
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-02 17:27:07 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-03 17:36:14 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

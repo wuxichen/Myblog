@@ -1,6 +1,66 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Gray's Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+">
+  <link href="/Myblog/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Myblog/css/hc.css" rel="stylesheet">
+  <link href="/Myblog/css/pygments.css" rel="stylesheet">
+  <link href="/Myblog/css/font-awesome.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif] d-->
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+       <!-- Sidebar -->
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand"><a href="/Myblog/"><h1 class="brand">Gray's Blog</h1></a><h3 class="description">这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+</h3></li>
+          <hr />
+          <li><a href="/Myblog/"><span class="normalfont">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a></li>
+          <li><a href="/Myblog/list.html"><span class="normalfont">文章列表</span></a></li>
+          <li><a href="/Myblog/categories/reading/"><span class="normalfont">读书笔记</span></a></li>
+          <li><a href="/Myblog/projects.html"><span class="normalfont">项目列表</span></a></li>
+          <li><a href="/Myblog/about.html"><span class="normalfont">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</span></a></li>
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="http://weibo.com/xgray"><i class="fa fa-weibo"></i> weibo</a> </li>
+           <li> <a href="https://github.com/wuxichen"><i class="fa fa-github-square"></i> github</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+    </div>
+    <style>
+    .showcase-wrapper {
+        background-image: url("/Myblog/images/showcase.jpg");
+    }
+    </style>
+
+<div class="showcase-wrapper sticky">
+    <div class="showcase-text">
+        Gray's Blog
+        <br>
+        
+        <span class="badge lazy"><smaller>FRESHLY MINTED</smaller></span><br><span style="font-size:24px;">Eclipse 常用快捷键</span><br><a href="/Myblog/backup/2014/09/02/eclipsekeys.html"><button type="button" class="btn btn-default showcase-button">Read More</button></a>
+        
+    </div>
+</div>
+    <div class="container">
+
 
 <div class ="container">
 
@@ -11,23 +71,226 @@ layout: default
 
     
     <ul class="homepage-posts most-recent">
-    {% for post in site.posts limit: 10 %}
+    
       <li>
-        <span class="post-meta pull-right">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <span class="post-meta pull-right">Sep 2, 2014</span>
 
         <h4>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          <a class="post-link" href="/Myblog/backup/2014/09/02/eclipsekeys.html">Eclipse 常用快捷键</a>
         </h4>
           <p>
-              {{ post.content | truncate: 300 | escape }}
+              &lt;p&gt;本文总结了Eclipse常用的快捷键，作为备忘，这些能够有效地提高编码效率。
+&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;1. 极其常用快捷键&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Alt + /&lt;/strong&gt; &amp;emsp;&amp;emsp;&amp;emsp;此快捷键为用户编辑的好帮手，能为用户&lt;span class=&quot;redfont&quot;&gt;提供内容的辅助&lt;/span&gt;，不要为记不全方法和属性名称犯愁&lt;br&gt;
+&lt;strong&gt;Ctrl + /&lt;/strong&gt;    &amp;emsp;&amp;emsp;&amp;emsp;&lt;span class=&quot;redfont&quot;&gt;快速添加注释&lt;...
           </p>
           <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
           
       </li>
-    {% endfor %}
+    
+      <li>
+        <span class="post-meta pull-right">Sep 2, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/timeseries/2014/09/02/RJavaonLinux.html">【环境搭建】Redhat 5.8系统安装R语言作Arima模型预测</a>
+        </h4>
+          <p>
+              &lt;p&gt;最近有项目要在服务器上作时间序列预测的工作，采用Arima模型预测，用java调用Arima的R语言命令进行。
+本文记录的是在服务器（Red Hat 5.8）上的搭建工作，供参考！&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4&gt;1. 安装C compiler&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;span class=&quot;grayfont&quot;&gt;
+（无用，版本太低，但可作为高版本的基础，否则无编译器的话无法编译高版本）&lt;br&gt;
+1）装gcc：yum install gcc&lt;br&gt;
+2）装f77：yum install gcc-gfortran&lt;br&gt;
+3...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Sep 1, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/htmlcss/2014/09/01/JFreechartLinechart.html">【图表展示】JFreeChart画折线图</a>
+        </h4>
+          <p>
+              &lt;p&gt;JFreeChart的关键在于其数据集类型的选择，如果是标签类的数据集就采用CategoryDataset，有序数字类的数据集就采用XYSeriesCollection。
+更多数据集类型的内容参考如下博客：&lt;a href=&quot;http://blog.csdn.net/lxrw2002/article/details/1897702&quot;&gt;JFreeChart 典型数据集设置示例&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h4&gt;1. 选择合适的数据集类型&lt;/h4&gt;
+
+&lt;p&gt;由于我只需要折线图的横坐标是有序数字，故采用XYSeriesCollection类型。&lt;/p&gt;
+
+&lt;div cla...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Sep 1, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/php/2014/09/01/WeiboRenrenAuthentication.html">微博人人开放平台授权</a>
+        </h4>
+          <p>
+              &lt;p&gt;这里以人人网为例子，新浪微博的几乎一样。
+附_官方指南：
+人人网：&lt;a href=&quot;http://wiki.dev.renren.com/wiki/Authentication&quot;&gt;人人网开放平台官方指南&lt;/a&gt;
+微博：&lt;a href=&quot;http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6#Web.E5.BA.94.E7.94.A8.E7.9A.84.E9.AA.8C.E8.AF.81.E6.8E.88.E6.9D.83&quot;&gt;新浪微博开放平台官方指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;授权验证步骤&lt;/h3&gt;
+
+&lt;ol&gt;
+...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 28, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/backup/2014/08/28/gitcommands.html">Git常用命令总结</a>
+        </h4>
+          <p>
+              &lt;h2&gt;目录&lt;/h2&gt;
+
+&lt;p&gt;&lt;span style=&quot;line-height: 30px;&quot;&gt;
+&lt;a href=&quot;#t1&quot;&gt;1. Git创建及初始化: clone, init, remote&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#t2&quot;&gt;2. 仓库中的文件操作: add, rm&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#t3&quot;&gt;3. 提交修改内容: comit&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#t4&quot;&gt;4. 与远程仓库的交互通信: push, pull, fetch, merge, diff&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#t5&quot;&gt;5. 版本标签操作相关命令: tag&lt;/a&gt;&lt;br&gt;
+...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 28, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/backup/2014/08/28/git-jekyll.html">Jekyll搭建过程中的Git命令</a>
+        </h4>
+          <p>
+              &lt;p&gt;
+1. 创建Jekyll的新目录 &lt;br&gt;
+2. 初始化：&lt;code&gt;git init&lt;/code&gt; &lt;br&gt;
+3. 创建分支gh-pages：&lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; &lt;br&gt;
+4. 提交到本地git库中： &lt;br&gt;
+&lt;code&gt;git add --all . &lt;br&gt;
+ git commit  -m &quot;first post&quot;&lt;/code&gt; &lt;br&gt;
+5. 到github上建同名库“Myblog”：&lt;br&gt; 
+&lt;code&gt;git remote add myblog(新的仓库名) https://github.com/(...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 25, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/08/25/readingtest5.html">测试文章14</a>
+        </h4>
+          <p>
+              &lt;h2&gt;测试文章14&lt;/h2&gt;
+
+&lt;p&gt;person of interests中文的 的&lt;/p&gt;
+
+&lt;p&gt;25 Aug 2014&lt;/p&gt;
+
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 24, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/08/24/readingtest4.html">测试文章13</a>
+        </h4>
+          <p>
+              &lt;h2&gt;测试文章13&lt;/h2&gt;
+
+&lt;p&gt;person of interests中文的 的&lt;/p&gt;
+
+&lt;p&gt;24 Aug 2014&lt;/p&gt;
+
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 23, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/08/23/readingtest3.html">测试文章12</a>
+        </h4>
+          <p>
+              &lt;h2&gt;测试文章12&lt;/h2&gt;
+
+&lt;p&gt;person of interests中文的 的&lt;/p&gt;
+
+&lt;p&gt;23 Aug 2014&lt;/p&gt;
+
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Aug 22, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/08/22/readingtest2.html">测试文章11</a>
+        </h4>
+          <p>
+              &lt;h2&gt;测试文章11&lt;/h2&gt;
+
+&lt;p&gt;person of interests中文的 的&lt;/p&gt;
+
+&lt;p&gt;22 Aug 2014&lt;/p&gt;
+
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
   </ul>
     
     <ul>
-      <a href="{{ site.baseurl }}/list.html">View More...</a>
+      <a href="/Myblog/list.html">View More...</a>
 </ul>
   	</div>
+
+    <footer>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-02 17:27:07 +0800  </p>
+    </footer>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/Myblog/js/jquery-1.10.2.min.js"></script>
+    <script src="/Myblog/js/bootstrap.min.js"></script>
+    <script src="/Myblog/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Myblog/js/hc.js"></script>
+</body>
+
+</html>

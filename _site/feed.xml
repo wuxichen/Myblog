@@ -6,9 +6,61 @@
 </description>
     <link>http://wuxichen.github.io/Myblog/</link>
     <atom:link href="http://wuxichen.github.io/Myblog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 02 Sep 2014 17:27:07 +0800</pubDate>
-    <lastBuildDate>Tue, 02 Sep 2014 17:27:07 +0800</lastBuildDate>
+    <pubDate>Wed, 03 Sep 2014 17:36:14 +0800</pubDate>
+    <lastBuildDate>Wed, 03 Sep 2014 17:36:14 +0800</lastBuildDate>
     <generator>Jekyll v2.3.0</generator>
+    
+      <item>
+        <title>Jekyll搭建过程中的Git命令</title>
+        <description>&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;搭建环境，推送至Github&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+&lt;li&gt;创建Jekyll的新目录 &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;初始化：&lt;code&gt;git init&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;创建分支gh-pages：&lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;提交到本地git库中： &lt;br&gt;
+&lt;code&gt;git add --all . &lt;br&gt;
+git commit  -m &amp;quot;first post&amp;quot;&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;到github上建同名库“Myblog”：&lt;br&gt; 
+&lt;code&gt;git remote add myblog(新的仓库名) https://github.com/(username)/Myblog.git&lt;/code&gt; &lt;br&gt;&lt;/li&gt;
+&lt;li&gt;推送到github上：&lt;code&gt;git push myblog gh-pages&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;解决插件禁用问题&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;  Jekyll提供了插件功能，在网站源代码目录下，有一个名为&lt;code&gt;_plugins&lt;/code&gt;的目录，可以将一些插件放进去，这样，Jekyll在解析网站源代码时，就会运行其中的插件。例如我的博客中用到的分类功能，就是利用一项插件而得到的。&lt;br&gt;
+&amp;emsp;&amp;emsp;  在本地运行Jekyll时，这些插件会自动被调用，但是GitHub在解析网站源代码时，出于安全考虑，会开启安全模式，禁用这些插件。此时，GitHub为我们提供了另一种解析网站的方式，那就是直接上传最终的静态网页。这样，我们可以在本地使用Jeklly把网站解析出来，然后再上传到GitHub上， 这就使得我们既使用了插件，又使用了 GitHub。&lt;br&gt;
+&amp;emsp;&amp;emsp;  要想实现这一效果，&lt;span class=&quot;redfont&quot;&gt;我们需要维护两个分支，一个是网站的源代码分支，另一个是Jeklly 解析源代码后生成的静态网站&lt;/span&gt;。&lt;br&gt;
+&amp;emsp;&amp;emsp;  例如，我的源代码分支名为&lt;code&gt;source&lt;/code&gt;，静态网站分支名为&lt;code&gt;gh-pages&lt;/code&gt;。平时写博客时，首先在&lt;code&gt;master&lt;/code&gt;分支下，添加新文章，然后本地使用&lt;code&gt;jekyll build&lt;/code&gt;将添加文章后的网站解析一次，这时&lt;code&gt;_site&lt;/code&gt;目录下就有新网站的静态代码了。然后把这个目录下的所有内容复制到&lt;code&gt;gh-pages&lt;/code&gt;分支下。以下为脚本命令：   &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git checkout &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;
+git add --all .
+git commit -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;deploy blog&amp;quot;&lt;/span&gt;
+cp -r _site/ /tmp/
+git checkout gh-pages
+rm -r ./*
+cp -r /tmp/_site/* ./
+git add --all .
+git commit -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;deploy blog&amp;quot;&lt;/span&gt;
+git push origin gh-pages
+git checkout &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 04 Sep 2014 01:00:00 +0800</pubDate>
+        <link>http://wuxichen.github.io/Myblog/backup/2014/09/04/git-jekyll.html</link>
+        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/backup/2014/09/04/git-jekyll.html</guid>
+        
+        
+        <category>backup</category>
+        
+      </item>
     
       <item>
         <title>Eclipse 常用快捷键</title>
@@ -670,30 +722,6 @@ git revert用于用一个commit来记录并回滚早前的commit，经常是一�
         <pubDate>Thu, 28 Aug 2014 03:04:00 +0800</pubDate>
         <link>http://wuxichen.github.io/Myblog/backup/2014/08/28/gitcommands.html</link>
         <guid isPermaLink="true">http://wuxichen.github.io/Myblog/backup/2014/08/28/gitcommands.html</guid>
-        
-        
-        <category>backup</category>
-        
-      </item>
-    
-      <item>
-        <title>Jekyll搭建过程中的Git命令</title>
-        <description>&lt;p&gt;
-1. 创建Jekyll的新目录 &lt;br&gt;
-2. 初始化：&lt;code&gt;git init&lt;/code&gt; &lt;br&gt;
-3. 创建分支gh-pages：&lt;code&gt;git checkout --orphan gh-pages&lt;/code&gt; &lt;br&gt;
-4. 提交到本地git库中： &lt;br&gt;
-&lt;code&gt;git add --all . &lt;br&gt;
- git commit  -m &quot;first post&quot;&lt;/code&gt; &lt;br&gt;
-5. 到github上建同名库“Myblog”：&lt;br&gt; 
-&lt;code&gt;git remote add myblog(新的仓库名) https://github.com/(username)/Myblog.git&lt;/code&gt; &lt;br&gt;
-6. 推送到github上：&lt;code&gt;git push myblog gh-pages&lt;/code&gt;
-
-&lt;/p&gt;
-</description>
-        <pubDate>Thu, 28 Aug 2014 01:04:00 +0800</pubDate>
-        <link>http://wuxichen.github.io/Myblog/backup/2014/08/28/git-jekyll.html</link>
-        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/backup/2014/08/28/git-jekyll.html</guid>
         
         
         <category>backup</category>

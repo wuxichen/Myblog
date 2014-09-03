@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>【图表展示】JFreeChart画折线图</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+">
+  <link href="/Myblog/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Myblog/css/hc.css" rel="stylesheet">
+  <link href="/Myblog/css/pygments.css" rel="stylesheet">
+  <link href="/Myblog/css/font-awesome.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif] d-->
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+       <!-- Sidebar -->
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand"><a href="/Myblog/"><h1 class="brand">Gray's Blog</h1></a><h3 class="description">这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+</h3></li>
+          <hr />
+          <li><a href="/Myblog/"><span class="normalfont">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a></li>
+          <li><a href="/Myblog/list.html"><span class="normalfont">文章列表</span></a></li>
+          <li><a href="/Myblog/categories/reading/"><span class="normalfont">读书笔记</span></a></li>
+          <li><a href="/Myblog/projects.html"><span class="normalfont">项目列表</span></a></li>
+          <li><a href="/Myblog/about.html"><span class="normalfont">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</span></a></li>
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="http://weibo.com/xgray"><i class="fa fa-weibo"></i> weibo</a> </li>
+           <li> <a href="https://github.com/wuxichen"><i class="fa fa-github-square"></i> github</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+
+  <div id="article">
+   <div class="article-title normalfont">【图表展示】JFreeChart画折线图</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 01 Sep 2014</small>
+       <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
+   <div class="post">
+     <p>JFreeChart的关键在于其数据集类型的选择，如果是标签类的数据集就采用CategoryDataset，有序数字类的数据集就采用XYSeriesCollection。
+更多数据集类型的内容参考如下博客：<a href="http://blog.csdn.net/lxrw2002/article/details/1897702">JFreeChart 典型数据集设置示例</a></p>
+
+<p><br></p>
+
+<h4>1. 选择合适的数据集类型</h4>
+
+<p>由于我只需要折线图的横坐标是有序数字，故采用XYSeriesCollection类型。</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">XYSeriesCollection</span> <span class="n">dataset</span><span class="o">;</span></code></pre></div>
+
+<p><br></p>
+
+<h4>2. 向数据集中加入数据</h4>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">XYSeries</span> <span class="n">xyseries</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">XYSeries</span><span class="o">(</span><span class="s">&quot;reality&quot;</span><span class="o">);</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">horizontal</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++</span> <span class="o">){</span>
+    <span class="n">xyseries</span><span class="o">.</span><span class="na">add</span><span class="o">(</span> <span class="n">horizontal</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">reality</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">);</span>
+<span class="o">}</span>
+<span class="n">dataset</span><span class="o">.</span><span class="na">addSeries</span><span class="o">(</span><span class="n">xyseries</span><span class="o">);</span></code></pre></div>
+
+<p>其中，&quot;reality&quot;是这条数据的名称；horizontal是横坐标的数组；reality数组是该条数据的各个值，作为数据点的纵坐标；最后，通过<code>addSeries()</code>函数将该条数据加入到数据集中。</p>
+
+<p><br></p>
+
+<h4>3. 解决中文乱码问题</h4>
+
+<p>这里采用设定主题的方式，设置中文字体解决乱码问题，设置如下：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">standardChartTheme</span> <span class="n">standardChartTheme</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StandardChartTheme</span><span class="o">(</span><span class="s">&quot;CN&quot;</span><span class="o">);</span>       <span class="c1">//设置标题字体  </span>
+<span class="n">standardChartTheme</span><span class="o">.</span><span class="na">setExtraLargeFont</span><span class="o">(</span><span class="k">new</span> <span class="nf">Font</span><span class="o">(</span><span class="s">&quot;宋体&quot;</span><span class="o">,</span><span class="n">Font</span><span class="o">.</span><span class="na">BOLD</span><span class="o">,</span><span class="mi">20</span><span class="o">));</span>      <span class="c1">//设置图例的字体  </span>
+<span class="n">standardChartTheme</span><span class="o">.</span><span class="na">setRegularFont</span><span class="o">(</span><span class="k">new</span> <span class="nf">Font</span><span class="o">(</span><span class="s">&quot;宋体&quot;</span><span class="o">,</span><span class="n">Font</span><span class="o">.</span><span class="na">PLAIN</span><span class="o">,</span><span class="mi">15</span><span class="o">));</span>        <span class="c1">//设置轴向的字体  </span>
+<span class="n">standardChartTheme</span><span class="o">.</span><span class="na">setLargeFont</span><span class="o">(</span><span class="k">new</span> <span class="nf">Font</span><span class="o">(</span><span class="s">&quot;宋体&quot;</span><span class="o">,</span><span class="n">Font</span><span class="o">.</span><span class="na">PLAIN</span><span class="o">,</span><span class="mi">15</span><span class="o">));</span>          <span class="c1">//应用主题样式  </span>
+<span class="n">ChartFactory</span><span class="o">.</span><span class="na">setChartTheme</span><span class="o">(</span><span class="n">standardChartTheme</span><span class="o">);</span></code></pre></div>
+
+<p><br></p>
+
+<h4>4. 画图</h4>
+
+<p>要画折线图，则采用<span class="redfont">XYLineChart</span></p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">JFreeChart</span> <span class="n">chart</span> <span class="o">=</span> <span class="n">ChartFactory</span><span class="o">.</span><span class="na">createXYLineChart</span><span class="o">(</span>
+                <span class="s">&quot;图表标题在这里&quot;</span><span class="o">,</span> <span class="s">&quot;横坐标标题&quot;</span><span class="o">,</span> <span class="s">&quot;纵坐标标题&quot;</span><span class="o">,</span> <span class="n">dataset</span><span class="o">);</span></code></pre></div>
+
+<p>将jfreechart放入java容器组件，并显示：  </p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">ChartFrame</span> <span class="n">chartFrame</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ChartFrame</span><span class="o">(</span><span class="s">&quot;窗口标题在这里&quot;</span><span class="o">,</span><span class="n">chart</span><span class="o">);</span> 
+<span class="c1">//chart要放在Java容器组件中，ChartFrame继承自java的Jframe类。该第一个参数的数据是放在窗口左上角的，不是正中间的标题。</span>
+<span class="n">chartFrame</span><span class="o">.</span><span class="na">pack</span><span class="o">();</span>         <span class="c1">//以合适的大小展现图形</span>
+<span class="n">chartFrame</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>    <span class="c1">//图形是否可见</span></code></pre></div>
+
+<p><br></p>
+
+<h4>5. 设置背景色与纵坐标范围（补充）</h4>
+
+<p>jfree默认的背景色是灰色，看不清折线图，故将其改为白色</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">XYPlot</span> <span class="n">p</span> <span class="o">=</span> <span class="n">chart</span><span class="o">.</span><span class="na">getXYPlot</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setBackgroundPaint</span><span class="o">(</span><span class="n">ChartColor</span><span class="o">.</span><span class="na">WHITE</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setRangeGridlinePaint</span><span class="o">(</span><span class="n">ChartColor</span><span class="o">.</span><span class="na">GRAY</span><span class="o">);</span></code></pre></div>
+
+<p>纵坐标的范围可以人为设定，如下：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">NumberAxis</span> <span class="n">numberaxis</span> <span class="o">=</span> <span class="o">(</span><span class="n">NumberAxis</span><span class="o">)</span><span class="n">p</span><span class="o">.</span><span class="na">getRangeAxis</span><span class="o">();</span>
+<span class="n">numberaxis</span><span class="o">.</span><span class="na">setAutoTickUnitSelection</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="n">numberaxis</span><span class="o">.</span><span class="na">setTickUnit</span><span class="o">(</span><span class="k">new</span> <span class="nf">NumberTickUnit</span><span class="o">(</span><span class="mi">10</span><span class="o">));</span>   <span class="c1">//设置纵坐标值的间距(10)</span>
+<span class="n">numberaxis</span><span class="o">.</span><span class="na">setRangeWithMargins</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="mi">100</span><span class="o">);</span>           <span class="c1">//纵坐标值只能是这之间的值(0~100)</span></code></pre></div>
+
+   </div>
+ </div>
+
+
+
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+  
+  <li class="previous"><a href="/Myblog/php/2014/09/01/WeiboRenrenAuthentication.html">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/Myblog/timeseries/2014/09/02/RJavaonLinux.html">Newer &rarr;</a></li>
+  
+
+</ul>
+
+  <div id="disqus_thread">
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = ''; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      
+
+    </ul>
+    </div>
+    <footer>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-02 17:27:07 +0800  </p>
+    </footer>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/Myblog/js/jquery-1.10.2.min.js"></script>
+    <script src="/Myblog/js/bootstrap.min.js"></script>
+    <script src="/Myblog/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Myblog/js/hc.js"></script>
+</body>
+
+</html>

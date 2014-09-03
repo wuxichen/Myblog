@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>微博人人开放平台授权</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+">
+  <link href="/Myblog/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Myblog/css/hc.css" rel="stylesheet">
+  <link href="/Myblog/css/pygments.css" rel="stylesheet">
+  <link href="/Myblog/css/font-awesome.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif] d-->
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+       <!-- Sidebar -->
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand"><a href="/Myblog/"><h1 class="brand">Gray's Blog</h1></a><h3 class="description">这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+</h3></li>
+          <hr />
+          <li><a href="/Myblog/"><span class="normalfont">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a></li>
+          <li><a href="/Myblog/list.html"><span class="normalfont">文章列表</span></a></li>
+          <li><a href="/Myblog/categories/reading/"><span class="normalfont">读书笔记</span></a></li>
+          <li><a href="/Myblog/projects.html"><span class="normalfont">项目列表</span></a></li>
+          <li><a href="/Myblog/about.html"><span class="normalfont">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</span></a></li>
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="http://weibo.com/xgray"><i class="fa fa-weibo"></i> weibo</a> </li>
+           <li> <a href="https://github.com/wuxichen"><i class="fa fa-github-square"></i> github</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+
+  <div id="article">
+   <div class="article-title normalfont">微博人人开放平台授权</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 01 Sep 2014</small>
+       <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
+   <div class="post">
+     <p>这里以人人网为例子，新浪微博的几乎一样。
+附_官方指南：
+人人网：<a href="http://wiki.dev.renren.com/wiki/Authentication">人人网开放平台官方指南</a>
+微博：<a href="http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6#Web.E5.BA.94.E7.94.A8.E7.9A.84.E9.AA.8C.E8.AF.81.E6.8E.88.E6.9D.83">新浪微博开放平台官方指南</a></p>
+
+<h3>授权验证步骤</h3>
+
+<ol>
+<li><p>首先要申请开放平台的<strong>API Key</strong> 和 <strong>API Secret</strong>，指南里有申请步骤</p></li>
+<li><p>让用户点击以下地址连接（红色记号为自定部分）：
+https://graph.renren.com/oauth/authorize?client_id=<span class="redfont">API Key</span>&amp;redirect_uri=<span class="redfont">http://127.0.0.1/test/get.php（转向地址,下一步创建这个文件）</span>&amp;response_type=code</p></li>
+<li><p>在test目录下创建get.php文件，主要内容：<br>
+1) 利用code才能获得access_token： <code>$code = $_GET[&#39;code&#39;];</code><br>
+2) 以下是获取Access_Token的连接：<br>
+$url = &#39;https://graph.renren.com/oauth/token?grant_type=authorization_code&amp;client_id=<span class="redfont">API Key</span>&amp;redirect_uri=<span class="redfont">http://127.0.0.1/test/get.php（同样是转向地址，自身文件就行）</span>&amp;client_secret=<span class="redfont">API Secret</span>&amp;code=&#39;.<span class="redfont">$code（3.1中的code）</span>;<br>
+3) 用PHP的file_get_contents传递POST请求给$url，代码如下：  </p></li>
+</ol>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$options = array( &#39;http&#39; =&gt; array( &#39;method&#39; =&gt; &#39;POST&#39;, &#39;header&#39; =&gt; &#39;Content-type:application/x-www-form-urlencoded&#39; ) ); </span>
+<span class="x">$content = stream_context_create( $options ); </span>
+<span class="x">$result = file_get_contents( $url, false, $content ); </span>
+<span class="x">$result = json_decode( $result );</span></code></pre></div>
+
+<p>此时的<code>$result</code>就含有&#39;access_token&#39;, &#39;refresh_token&#39;等，直接<code>$result[&#39;access_token&#39;]</code>可以获取。  </p>
+
+<p><br></p>
+
+<blockquote>
+<h4>Notice：</h4>
+</blockquote>
+
+<ol>
+<li><p><code>“Warning: file_get_contents(): Unable to find the wrapper &quot;https&quot; - did you<br> forget to enable it when you configured PHP?...”</code><br>
+这个错误，需要将php.ini中的&quot;extension=php_openssl.dll&quot;去掉前面的“;”  </p></li>
+<li><p><code>“Warning: file_get_contents(https://graph.renren.com/oauth/token?.....): <br>failed to open stream: HTTP request failed! HTTP/1.1 401 Unauthorized”</code><br>
+这个错误，网上有很多种说法，比如开远程访问、user_agent设为firefox浏览器之类的，在我机子上这些设置无论开启与否都无影响，只是注意一点，也是我错的地方，$url中的地址不能有换行；</p></li>
+<li><p>另外就是转向地址本机写localhost识别不了还得写127.0.0.1</p></li>
+<li><p>在抓取用户数据的时候，需要注意应用如果是没审核的状态一些API只能用于测试用户（这个再应用的界面可以设置），如果抓非测试用户的话会出现“Invalid Access Token”的错误，非常坑爹。。</p></li>
+</ol>
+
+<p>好了，之后就可以抓数据了~祝大家好运~</p>
+
+   </div>
+ </div>
+
+
+
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+  
+  <li class="previous"><a href="/Myblog/backup/2014/08/28/gitcommands.html">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/Myblog/htmlcss/2014/09/01/JFreechartLinechart.html">Newer &rarr;</a></li>
+  
+
+</ul>
+
+  <div id="disqus_thread">
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = ''; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      
+
+    </ul>
+    </div>
+    <footer>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-02 17:27:07 +0800  </p>
+    </footer>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/Myblog/js/jquery-1.10.2.min.js"></script>
+    <script src="/Myblog/js/bootstrap.min.js"></script>
+    <script src="/Myblog/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Myblog/js/hc.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>【环境搭建】Redhat 5.8系统安装R语言作Arima模型预测</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+">
+  <link href="/Myblog/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Myblog/css/hc.css" rel="stylesheet">
+  <link href="/Myblog/css/pygments.css" rel="stylesheet">
+  <link href="/Myblog/css/font-awesome.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif] d-->
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+       <!-- Sidebar -->
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand"><a href="/Myblog/"><h1 class="brand">Gray's Blog</h1></a><h3 class="description">这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+</h3></li>
+          <hr />
+          <li><a href="/Myblog/"><span class="normalfont">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a></li>
+          <li><a href="/Myblog/list.html"><span class="normalfont">文章列表</span></a></li>
+          <li><a href="/Myblog/categories/reading/"><span class="normalfont">读书笔记</span></a></li>
+          <li><a href="/Myblog/projects.html"><span class="normalfont">项目列表</span></a></li>
+          <li><a href="/Myblog/about.html"><span class="normalfont">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</span></a></li>
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="http://weibo.com/xgray"><i class="fa fa-weibo"></i> weibo</a> </li>
+           <li> <a href="https://github.com/wuxichen"><i class="fa fa-github-square"></i> github</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+
+  <div id="article">
+   <div class="article-title normalfont">【环境搭建】Redhat 5.8系统安装R语言作Arima模型预测</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 02 Sep 2014</small>
+       <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
+   <div class="post">
+     <p>最近有项目要在服务器上作时间序列预测的工作，采用Arima模型预测，用java调用Arima的R语言命令进行。
+本文记录的是在服务器（Red Hat 5.8）上的搭建工作，供参考！</p>
+
+<p><br></p>
+
+<blockquote>
+<h4>1. 安装C compiler</h4>
+</blockquote>
+
+<p><span class="grayfont">
+（无用，版本太低，但可作为高版本的基础，否则无编译器的话无法编译高版本）<br>
+1）装gcc：yum install gcc<br>
+2）装f77：yum install gcc-gfortran<br>
+3）装cpp：yum install glibc-headers<br>
+yum install gcc-c++</p>
+
+<h2></span></h2>
+
+<p><strong>在装有低版本的gcc情况下，执行如下步骤</strong><br>
+<a href="%EF%BC%88%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83http://www.tuicool.com/articles/AZvEBr%EF%BC%89" title="参考博客">（部分参考http://www.tuicool.com/articles/AZvEBr）</a></p>
+
+<p>1）装M4：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> 到M4的文件夹
+./configure
+make
+make install</code></pre></div>
+
+<p>2）装GMP：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> 到GMP文件夹
+./configure --prefix<span class="o">=</span>/usr/local/gmp-4.3.2
+make
+make install</code></pre></div>
+
+<p>3）装MPFR：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> 到MPFR的文件夹
+./configure --prefix<span class="o">=</span>/usr/local/mpfr-2.4.2 --with-gmp<span class="o">=</span>/usr/local/gmp-4.3.2/
+make
+make install</code></pre></div>
+
+<p>4）装MPC：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> 到MPC的文件夹
+./configure --prefix<span class="o">=</span>/usr/local/mpc-0.8.1 --with-gmp<span class="o">=</span>/usr/local/gmp-4.3.2/ --with-mpfr<span class="o">=</span>/usr/local/mpfr-2.4.2/ 
+make
+make install</code></pre></div>
+
+<p>5）修改环境变量：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">vi .bash_profile</code></pre></div>
+
+<p>文件后面加：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/gmp-4.3.2/lib/:/usr/local/mpfr-2.4.2/lib/:/usr/local/mpc-0.8.1/lib/</code></pre></div>
+
+<p><span class="redfont"><strong>（令其生效）source .bash_profile</strong></span><br>
+6）装gcc：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> 到gcc文件夹
+./configure --enable-threads<span class="o">=</span>posix --disable-checking --with-gmp<span class="o">=</span>/usr/local/gmp-4.3.2/ --with-mpfr<span class="o">=</span>/usr/local/mpfr-2.4.2/ --with-mpc<span class="o">=</span>/usr/local/mpc-0.8.1/  
+make
+make install</code></pre></div>
+
+<p>7）若有两个版本的gcc就换成高版本的
+mv 重命名
+cp 将[<span class="redfont">gcc g++ gcj</span>（cpp c++这两个可以忽略）]复制到 /usr/bin</p>
+
+<p><br></p>
+
+<blockquote>
+<h4>2. 安装R-3.1.1</h4>
+</blockquote>
+
+<p>1）移到R-3.1.1目录下<br>
+2）
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">yum install readline-devel
+yum install libXt-devel</code></pre></div></p>
+
+<p>3）
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">./configure --prefix<span class="o">=</span>/usr/R-3.1.1 --enable-R-shlib</code></pre></div></p>
+
+<p>4）
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">make
+make install</code></pre></div></p>
+
+<p><br></p>
+
+<blockquote>
+<h4>3. 配置环境变量</h4>
+</blockquote>
+
+<p>1) 打开bash_profile文件  </p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">vi .bash_profile</code></pre></div>
+  
+
+<p>2) 在PATH最后加上 <code>“:$HOME/usr/R-3.1.1/bin”</code>  </p>
+
+<p>3) 退出vim，并保存  </p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">source</span> .bash_profile</code></pre></div>
+
+<p><br></p>
+
+<blockquote>
+<h4>4. R语言控制台安装完毕，输入命令</h4>
+</blockquote>
+
+<p>1) 终端中输入“R”即可进入R语言控制台</p>
+
+<p>2) 输入如下命令，安装相关工具包：</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">install.packages<span class="p">(</span><span class="s">&quot;Rserve&quot;</span><span class="p">)</span>
+install.packages<span class="p">(</span><span class="s">&quot;TTR&quot;</span><span class="p">)</span>
+install.packages<span class="p">(</span><span class="s">&quot;forecast&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><br></p>
+
+<blockquote>
+<h4>5. 运行java程序</h4>
+</blockquote>
+
+<p>1) Java工程中嵌入两个jar包：<code>REngine.jar</code> 和 <code>RserveEngine.jar</code></p>
+
+<p>2) 开始运行，启动Rserve</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>Rserve<span class="p">)</span>
+Rserve<span class="p">()</span></code></pre></div>
+
+<p><br>
+<br>
+附文件下载地址：<br>
+<a href="http://gcc.petsads.us/releases/gcc-4.6.4/gcc-4.6.4.tar.gz">http://gcc.petsads.us/releases/gcc-4.6.4/gcc-4.6.4.tar.gz</a>
+<a href="http://ftp.gnu.org/gnu/m4/m4-1.4.5.tar.gz">http://ftp.gnu.org/gnu/m4/m4-1.4.5.tar.gz</a> 
+<a href="ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-4.3.2.tar.bz2">ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-4.3.2.tar.bz2</a> 
+<a href="ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-0.8.1.tar.gz">ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-0.8.1.tar.gz</a><br>
+<a href="ftp://gcc.gnu.org/pub/gcc/infrastructure/mpfr-2.4.2.tar.bz2">ftp://gcc.gnu.org/pub/gcc/infrastructure/mpfr-2.4.2.tar.bz2</a> </p>
+
+   </div>
+ </div>
+
+
+
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+  
+  <li class="previous"><a href="/Myblog/htmlcss/2014/09/01/JFreechartLinechart.html">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/Myblog/backup/2014/09/02/eclipsekeys.html">Newer &rarr;</a></li>
+  
+
+</ul>
+
+  <div id="disqus_thread">
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = ''; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      
+
+    </ul>
+    </div>
+    <footer>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-02 17:27:07 +0800  </p>
+    </footer>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/Myblog/js/jquery-1.10.2.min.js"></script>
+    <script src="/Myblog/js/bootstrap.min.js"></script>
+    <script src="/Myblog/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Myblog/js/hc.js"></script>
+</body>
+
+</html>

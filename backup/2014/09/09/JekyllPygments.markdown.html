@@ -49,52 +49,38 @@
    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 09 Sep 2014</small>
        <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
    <div class="post">
-     <p><br>
-&emsp;&emsp;    Pygments可以实现多种代码语法的高亮，在搭建Jekyll博客的过程中，可以利用python setuptools安装，比较方便。但在安装过程中会有<code>UnicodeDecodeError</code>错误，解决方法可见本文第一部分。<br>
-&emsp;&emsp;    本机环境：Windows 7 64位操作系统，python 2.7（32位），Jekyll 2.3.0<br>
-<br></p>
+     <br>
+&emsp;&emsp;	Pygments可以实现多种代码语法的高亮，在搭建Jekyll博客的过程中，可以利用python setuptools安装，比较方便。但在安装过程中会有`UnicodeDecodeError`错误，解决方法可见本文第一部分。  
+&emsp;&emsp;	本机环境：Windows 7 64位操作系统，python 2.7（32位），Jekyll 2.3.0  
+<br>
+> ### 1. 安装 setuptools ###
 
-<blockquote>
-<h3>1. 安装 setuptools</h3>
-</blockquote>
-
-<p>1) 下载&quot;ez_setup.py&quot;，网址为：<a href="https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install">https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install</a><br>
-2) 此时，用运行该脚本<code>python ez_setup.py</code>，会出现错误：<br>
-<code>UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0xb3 in position 3: ordinal not in range(128)</code><br>
-&emsp;&emsp;    解决方法：根据错误提示，找到python的lib目录中<codde>mimetypes.py</code>文件，并在其中找到如下代码，并修改，之后再次运行即可通过。</p>
-
+1) 下载"ez\_setup.py"，网址为：[https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install](https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install)  
+2) 此时，用运行该脚本<code>python ez\_setup.py</code>，会出现错误：  
+`UnicodeDecodeError: 'ascii' codec can't decode byte 0xb3 in position 3: ordinal not in range(128)`  
+&emsp;&emsp;	解决方法：根据错误提示，找到python的lib目录中<codde>mimetypes.py</code>文件，并在其中找到如下代码，并修改，之后再次运行即可通过。
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">default_encoding</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span>
 
 <span class="c"># 将该行代码改为：默认编码采用GBK而非UTF8</span>
 <span class="c"># default_encoding = sys.getdefaultencoding()</span>
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&#39;gbk&#39;</span><span class="p">:</span>
-    <span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;gbk&#39;</span><span class="p">)</span>
-    <span class="n">default_encoding</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span></code></pre></div>
+	<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+	<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;gbk&#39;</span><span class="p">)</span>
+	<span class="n">default_encoding</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span></code></pre></div>
 
-<p><br></p>
+<br>
+> ### 2. 安装 Pygments ###
 
-<blockquote>
-<h3>2. 安装 Pygments</h3>
-</blockquote>
+&emsp;&emsp;	安装完setuptools之后，保证环境变量中包含Python的Script文件夹（路径），运行命令：`easy_install Pygments`，即可安装Pygments。
 
-<p>&emsp;&emsp;    安装完setuptools之后，保证环境变量中包含Python的Script文件夹（路径），运行命令：<code>easy_install Pygments</code>，即可安装Pygments。</p>
+<br>
+> ### 3. 使用Pygments实现语法高亮 ###
 
-<p><br></p>
-
-<blockquote>
-<h3>3. 使用Pygments实现语法高亮</h3>
-</blockquote>
-
-<p>&emsp;&emsp;    Pygments提供了多种样式，可以在Pygments官网的Demo中选择某种语言的例子，体验不同的样式。另外，通过下面的命令可以查看当前支持的样式：</p>
-
+&emsp;&emsp;	Pygments提供了多种样式，可以在Pygments官网的Demo中选择某种语言的例子，体验不同的样式。另外，通过下面的命令可以查看当前支持的样式：
 <div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pygments.styles</span> <span class="kn">import</span> <span class="n">STYLE_MAP</span>
 <span class="n">STYLE_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></code></pre></div>
-
-<p>&emsp;&emsp;    选择一种样式，如native，运行如下命令，生成样式文件pygments.css，并将其包含进网站样式表中。</p>
-
+&emsp;&emsp;	选择一种样式，如native，运行如下命令，生成样式文件pygments.css，并将其包含进网站样式表中。
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">pygmentize -S native -f html &gt; pygments.css</code></pre></div>
-
    </div>
  </div>
 
@@ -104,7 +90,7 @@
 
  <ul class="pager">
   
-  <li class="previous"><a href="/Myblog/backup/2014/09/04/git-jekyll.html">&larr; Older</a></li>
+  <li class="previous"><a href="/Myblog/backup/2014/09/09/JekyllPygments.html">&larr; Older</a></li>
   
   
 
@@ -127,7 +113,7 @@
     </ul>
     </div>
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 16:06:06 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 15:41:11 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

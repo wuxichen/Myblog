@@ -6,9 +6,109 @@
 </description>
     <link>http://wuxichen.github.io/Myblog/</link>
     <atom:link href="http://wuxichen.github.io/Myblog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 03 Sep 2014 17:36:14 +0800</pubDate>
-    <lastBuildDate>Wed, 03 Sep 2014 17:36:14 +0800</lastBuildDate>
+    <pubDate>Tue, 09 Sep 2014 15:41:11 +0800</pubDate>
+    <lastBuildDate>Tue, 09 Sep 2014 15:41:11 +0800</lastBuildDate>
     <generator>Jekyll v2.3.0</generator>
+    
+      <item>
+        <title>【环境搭建】Jekyll中采用Pygments实现语法高亮</title>
+        <description>&lt;br&gt;
+&amp;emsp;&amp;emsp;	Pygments可以实现多种代码语法的高亮，在搭建Jekyll博客的过程中，可以利用python setuptools安装，比较方便。但在安装过程中会有`UnicodeDecodeError`错误，解决方法可见本文第一部分。  
+&amp;emsp;&amp;emsp;	本机环境：Windows 7 64位操作系统，python 2.7（32位），Jekyll 2.3.0  
+&lt;br&gt;
+&gt; ### 1. 安装 setuptools ###
+
+1) 下载&quot;ez\_setup.py&quot;，网址为：[https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install](https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install)  
+2) 此时，用运行该脚本&lt;code&gt;python ez\_setup.py&lt;/code&gt;，会出现错误：  
+`UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0xb3 in position 3: ordinal not in range(128)`  
+&amp;emsp;&amp;emsp;	解决方法：根据错误提示，找到python的lib目录中&lt;codde&gt;mimetypes.py&lt;/code&gt;文件，并在其中找到如下代码，并修改，之后再次运行即可通过。
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;default_encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 将该行代码改为：默认编码采用GBK而非UTF8&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# default_encoding = sys.getdefaultencoding()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;reload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;default_encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;br&gt;
+&gt; ### 2. 安装 Pygments ###
+
+&amp;emsp;&amp;emsp;	安装完setuptools之后，保证环境变量中包含Python的Script文件夹（路径），运行命令：`easy_install Pygments`，即可安装Pygments。
+
+&lt;br&gt;
+&gt; ### 3. 使用Pygments实现语法高亮 ###
+
+&amp;emsp;&amp;emsp;	Pygments提供了多种样式，可以在Pygments官网的Demo中选择某种语言的例子，体验不同的样式。另外，通过下面的命令可以查看当前支持的样式：
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pygments.styles&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;STYLE_MAP&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;STYLE_MAP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&amp;emsp;&amp;emsp;	选择一种样式，如native，运行如下命令，生成样式文件pygments.css，并将其包含进网站样式表中。
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pygmentize -S native -f html &amp;gt; pygments.css&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Tue, 09 Sep 2014 23:00:00 +0800</pubDate>
+        <link>http://wuxichen.github.io/Myblog/backup/2014/09/09/JekyllPygments.markdown.html</link>
+        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/backup/2014/09/09/JekyllPygments.markdown.html</guid>
+        
+        
+        <category>backup</category>
+        
+      </item>
+    
+      <item>
+        <title>【环境搭建】Jekyll中采用Pygments实现语法高亮</title>
+        <description>&lt;p&gt;&lt;br&gt;
+&amp;emsp;&amp;emsp;    Pygments可以实现多种代码语法的高亮，在搭建Jekyll博客的过程中，可以利用python setuptools安装，比较方便。但在安装过程中会有&lt;code&gt;UnicodeDecodeError&lt;/code&gt;错误，解决方法可见本文第一部分。&lt;br&gt;
+&amp;emsp;&amp;emsp;    本机环境：Windows 7 64位操作系统，python 2.7（32位），Jekyll 2.3.0&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;1. 安装 setuptools&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1) 下载&amp;quot;ez_setup.py&amp;quot;，网址为：&lt;a href=&quot;https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install&quot;&gt;https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install&lt;/a&gt;&lt;br&gt;
+2) 此时，用运行该脚本&lt;code&gt;python ez_setup.py&lt;/code&gt;，会出现错误：&lt;br&gt;
+&lt;code&gt;UnicodeDecodeError: &amp;#39;ascii&amp;#39; codec can&amp;#39;t decode byte 0xb3 in position 3: ordinal not in range(128)&lt;/code&gt;&lt;br&gt;
+&amp;emsp;&amp;emsp;    解决方法：根据错误提示，找到python的lib目录中&lt;codde&gt;mimetypes.py&lt;/code&gt;文件，并在其中找到如下代码，并修改，之后再次运行即可通过。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;default_encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 将该行代码改为：默认编码采用GBK而非UTF8&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# default_encoding = sys.getdefaultencoding()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;reload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;gbk&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;default_encoding&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getdefaultencoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;2. 安装 Pygments&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;    安装完setuptools之后，保证环境变量中包含Python的Script文件夹（路径），运行命令：&lt;code&gt;easy_install Pygments&lt;/code&gt;，即可安装Pygments。&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;3. 使用Pygments实现语法高亮&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;    Pygments提供了多种样式，可以在Pygments官网的Demo中选择某种语言的例子，体验不同的样式。另外，通过下面的命令可以查看当前支持的样式：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pygments.styles&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;STYLE_MAP&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;STYLE_MAP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;    选择一种样式，如native，运行如下命令，生成样式文件pygments.css，并将其包含进网站样式表中。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pygmentize -S native -f html &amp;gt; pygments.css&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 09 Sep 2014 23:00:00 +0800</pubDate>
+        <link>http://wuxichen.github.io/Myblog/backup/2014/09/09/JekyllPygments.html</link>
+        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/backup/2014/09/09/JekyllPygments.html</guid>
+        
+        
+        <category>backup</category>
+        
+      </item>
     
       <item>
         <title>Jekyll搭建过程中的Git命令</title>
@@ -756,40 +856,6 @@ git revert用于用一个commit来记录并回滚早前的commit，经常是一�
         <pubDate>Sun, 24 Aug 2014 03:55:16 +0800</pubDate>
         <link>http://wuxichen.github.io/Myblog/reading/2014/08/24/readingtest4.html</link>
         <guid isPermaLink="true">http://wuxichen.github.io/Myblog/reading/2014/08/24/readingtest4.html</guid>
-        
-        
-        <category>reading</category>
-        
-      </item>
-    
-      <item>
-        <title>测试文章12</title>
-        <description>&lt;h2&gt;测试文章12&lt;/h2&gt;
-
-&lt;p&gt;person of interests中文的 的&lt;/p&gt;
-
-&lt;p&gt;23 Aug 2014&lt;/p&gt;
-</description>
-        <pubDate>Sat, 23 Aug 2014 03:55:16 +0800</pubDate>
-        <link>http://wuxichen.github.io/Myblog/reading/2014/08/23/readingtest3.html</link>
-        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/reading/2014/08/23/readingtest3.html</guid>
-        
-        
-        <category>reading</category>
-        
-      </item>
-    
-      <item>
-        <title>测试文章11</title>
-        <description>&lt;h2&gt;测试文章11&lt;/h2&gt;
-
-&lt;p&gt;person of interests中文的 的&lt;/p&gt;
-
-&lt;p&gt;22 Aug 2014&lt;/p&gt;
-</description>
-        <pubDate>Fri, 22 Aug 2014 03:55:16 +0800</pubDate>
-        <link>http://wuxichen.github.io/Myblog/reading/2014/08/22/readingtest2.html</link>
-        <guid isPermaLink="true">http://wuxichen.github.io/Myblog/reading/2014/08/22/readingtest2.html</guid>
         
         
         <category>reading</category>

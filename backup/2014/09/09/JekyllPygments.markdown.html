@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Jekyll搭建过程中的Git命令</title>
+  <title>【环境搭建】Jekyll中采用Pygments实现语法高亮</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
 ">
@@ -45,51 +45,42 @@
 
 
   <div id="article">
-   <div class="article-title normalfont">Jekyll搭建过程中的Git命令</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 04 Sep 2014</small>
+   <div class="article-title normalfont">【环境搭建】Jekyll中采用Pygments实现语法高亮</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 09 Sep 2014</small>
        <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
    <div class="post">
-     <p><br></p>
+     <br>
+&emsp;&emsp;	Pygments可以实现多种代码语法的高亮，在搭建Jekyll博客的过程中，可以利用python setuptools安装，比较方便。但在安装过程中会有`UnicodeDecodeError`错误，解决方法可见本文第一部分。  
+&emsp;&emsp;	本机环境：Windows 7 64位操作系统，python 2.7（32位），Jekyll 2.3.0  
+<br>
+> ### 1. 安装 setuptools ###
 
-<blockquote>
-<h3>搭建环境，推送至Github</h3>
-</blockquote>
+1) 下载"ez\_setup.py"，网址为：[https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install](https://pypi.python.org/pypi/setuptools#windows-7-or-graphical-install)  
+2) 此时，用运行该脚本<code>python ez\_setup.py</code>，会出现错误：  
+`UnicodeDecodeError: 'ascii' codec can't decode byte 0xb3 in position 3: ordinal not in range(128)`  
+&emsp;&emsp;	解决方法：根据错误提示，找到python的lib目录中<codde>mimetypes.py</code>文件，并在其中找到如下代码，并修改，之后再次运行即可通过。
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">default_encoding</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span>
 
-<ol>
-<li>创建Jekyll的新目录 <br></li>
-<li>初始化：<code>git init</code> <br></li>
-<li>创建分支gh-pages：<code>git checkout --orphan gh-pages</code> <br></li>
-<li>提交到本地git库中： <br>
-<code>git add --all . <br>
-git commit  -m &quot;first post&quot;</code> <br></li>
-<li>到github上建同名库“Myblog”：<br> 
-<code>git remote add myblog(新的仓库名) https://github.com/(username)/Myblog.git</code> <br></li>
-<li>推送到github上：<code>git push myblog gh-pages</code></li>
-</ol>
+<span class="c"># 将该行代码改为：默认编码采用GBK而非UTF8</span>
+<span class="c"># default_encoding = sys.getdefaultencoding()</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&#39;gbk&#39;</span><span class="p">:</span>
+	<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+	<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span><span class="s">&#39;gbk&#39;</span><span class="p">)</span>
+	<span class="n">default_encoding</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getdefaultencoding</span><span class="p">()</span></code></pre></div>
 
-<p><br></p>
+<br>
+> ### 2. 安装 Pygments ###
 
-<blockquote>
-<h3>解决插件禁用问题</h3>
-</blockquote>
+&emsp;&emsp;	安装完setuptools之后，保证环境变量中包含Python的Script文件夹（路径），运行命令：`easy_install Pygments`，即可安装Pygments。
 
-<p>&emsp;&emsp;  Jekyll提供了插件功能，在网站源代码目录下，有一个名为<code>_plugins</code>的目录，可以将一些插件放进去，这样，Jekyll在解析网站源代码时，就会运行其中的插件。例如我的博客中用到的分类功能，就是利用一项插件而得到的。<br>
-&emsp;&emsp;  在本地运行Jekyll时，这些插件会自动被调用，但是GitHub在解析网站源代码时，出于安全考虑，会开启安全模式，禁用这些插件。此时，GitHub为我们提供了另一种解析网站的方式，那就是直接上传最终的静态网页。这样，我们可以在本地使用Jeklly把网站解析出来，然后再上传到GitHub上， 这就使得我们既使用了插件，又使用了 GitHub。<br>
-&emsp;&emsp;  要想实现这一效果，<span class="redfont">我们需要维护两个分支，一个是网站的源代码分支，另一个是Jeklly 解析源代码后生成的静态网站</span>。<br>
-&emsp;&emsp;  例如，我的源代码分支名为<code>source</code>，静态网站分支名为<code>gh-pages</code>。平时写博客时，首先在<code>master</code>分支下，添加新文章，然后本地使用<code>jekyll build</code>将添加文章后的网站解析一次，这时<code>_site</code>目录下就有新网站的静态代码了。然后把这个目录下的所有内容复制到<code>gh-pages</code>分支下。以下为脚本命令：   </p>
+<br>
+> ### 3. 使用Pygments实现语法高亮 ###
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git checkout <span class="nb">source</span>
-git add --all .
-git commit -m <span class="s2">&quot;deploy blog&quot;</span>
-cp -r _site/ /tmp/
-git checkout gh-pages
-rm -r ./*
-cp -r /tmp/_site/* ./
-git add --all .
-git commit -m <span class="s2">&quot;deploy blog&quot;</span>
-git push origin gh-pages
-git checkout <span class="nb">source</span></code></pre></div>
-
+&emsp;&emsp;	Pygments提供了多种样式，可以在Pygments官网的Demo中选择某种语言的例子，体验不同的样式。另外，通过下面的命令可以查看当前支持的样式：
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pygments.styles</span> <span class="kn">import</span> <span class="n">STYLE_MAP</span>
+<span class="n">STYLE_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></code></pre></div>
+&emsp;&emsp;	选择一种样式，如native，运行如下命令，生成样式文件pygments.css，并将其包含进网站样式表中。
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pygmentize -S native -f html &gt; pygments.css</code></pre></div>
    </div>
  </div>
 
@@ -99,10 +90,8 @@ git checkout <span class="nb">source</span></code></pre></div>
 
  <ul class="pager">
   
-  <li class="previous"><a href="/Myblog/backup/2014/09/02/eclipsekeys.html">&larr; Older</a></li>
+  <li class="previous"><a href="/Myblog/backup/2014/09/09/JekyllPygments.html">&larr; Older</a></li>
   
-  
-  <li class="next"><a href="/Myblog/backup/2014/09/09/JekyllPygments.html">Newer &rarr;</a></li>
   
 
 </ul>

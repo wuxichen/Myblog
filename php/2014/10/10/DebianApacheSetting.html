@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>测试文章11</title>
+  <title>Debian下Apache配置多域名访问</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
 ">
@@ -45,15 +45,50 @@
 
 
   <div id="article">
-   <div class="article-title normalfont">测试文章11</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 22 Aug 2014</small>
+   <div class="article-title normalfont">Debian下Apache配置多域名访问</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 10 Oct 2014</small>
        <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
    <div class="post">
-     <h2>测试文章11</h2>
+     <p>&emsp;&emsp;当有些服务器需要服务多个域名时，Apache需要对不同域名过来的请求进行区分，这时需要用到<strong>Apache的多域名配置</strong>技术。<br>
+&emsp;&emsp;其实很简单，只要修改Apache的配置文件，在Debian系统中默认的路径是<code>/etc/apache2/sites-available/default</code>，打开该文件，会看见如下类似结构：</p>
 
-<p>person of interests中文的 的</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;VirtualHost *:80&gt;  
+    DocumentRoot /var/www/    
+    <span class="c"># Other directives here  </span>
+    <span class="c">#配置域名的目录访问权限  </span>
+    &lt;Directory <span class="s2">&quot;/www/testsite1&quot;</span>&gt;  
+        Options Indexes FollowSymLinks  
+        allow from all  
+    &lt;/Directory&gt;  
+&lt;/VirtualHost&gt;</code></pre></div>
 
-<p>22 Aug 2014</p>
+<p>&emsp;&emsp;现在假设有两个网站site1和site2，都存在<code>/var/www/</code>目录下，需要将它们设置为通过相应的域名（如www.site1.com与www.site2.com）直接访问。</p>
+
+<p>&emsp;&emsp;<strong>方法：</strong>在文件中的DocumentRoot下方加上需要服务的域名，如下方代码所示：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;VirtualHost *:80&gt;  
+    DocumentRoot /var/www/site1  
+    ServerName www.site1.com  
+    <span class="c"># Other directives here  </span>
+    <span class="c"># 配置域名的目录访问权限  </span>
+    &lt;Directory <span class="s2">&quot;/www/testsite1&quot;</span>&gt;  
+        Options Indexes FollowSymLinks  
+        allow from all  
+    &lt;/Directory&gt;  
+&lt;/VirtualHost&gt;  
+
+&lt;VirtualHost *:80&gt;  
+    DocumentRoot /var/www/site2  
+    ServerName www.site2.com  
+    <span class="c"># Other directives here  </span>
+    <span class="c">#配置域名的目录访问权限  </span>
+    &lt;Directory <span class="s2">&quot;/www/testsite1&quot;</span>&gt;  
+        Options Indexes FollowSymLinks  
+        allow from all  
+    &lt;/Directory&gt;  
+&lt;/VirtualHost&gt;</code></pre></div>
+
+<p>&emsp;&emsp;这样配置完毕之后，通过www.site1.com就能访问<code>/var/www/site1</code>这个网站，相应的通过www.site2.com就能访问<code>/var/www/site2</code>。</p>
 
    </div>
  </div>
@@ -64,10 +99,10 @@
 
  <ul class="pager">
   
-  <li class="previous"><a href="/Myblog/reading/2014/08/21/readingtest1.html">&larr; Older</a></li>
+  <li class="previous"><a href="/Myblog/reading/2014/10/06/CleanCode.html">&larr; Older</a></li>
   
   
-  <li class="next"><a href="/Myblog/reading/2014/08/23/readingtest3.html">Newer &rarr;</a></li>
+  <li class="next"><a href="/Myblog/linux/2014/10/11/LinuxEnvironmentVariables.html">Newer &rarr;</a></li>
   
 
 </ul>
@@ -89,7 +124,7 @@
     </ul>
     </div>
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 16:30:59 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-10-11 19:46:13 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

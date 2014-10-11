@@ -55,7 +55,7 @@
         Gray's Blog
         <br>
         
-        <span class="badge lazy"><smaller>FRESHLY MINTED</smaller></span><br><span style="font-size:24px;">【环境搭建】Jekyll中采用Pygments实现语法高亮</span><br><a href="/Myblog/backup/2014/09/09/JekyllPygments.html"><button type="button" class="btn btn-default showcase-button">Read More</button></a>
+        <span class="badge lazy"><smaller>FRESHLY MINTED</smaller></span><br><span style="font-size:24px;">Linux的环境变量总结</span><br><a href="/Myblog/linux/2014/10/11/LinuxEnvironmentVariables.html"><button type="button" class="btn btn-default showcase-button">Read More</button></a>
         
     </div>
 </div>
@@ -71,6 +71,97 @@
 
     
     <ul class="homepage-posts most-recent">
+    
+      <li>
+        <span class="post-meta pull-right">Oct 11, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/linux/2014/10/11/LinuxEnvironmentVariables.html">Linux的环境变量总结</a>
+        </h4>
+          <p>
+              &lt;p&gt;&amp;emsp;&amp;emsp;Linux下装一些软件时经常会需要修改环境变量，而对于普通用户和root用户需要修改的文件不同，本文对此进行系统性的总结。
+&lt;br&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h3&gt;1. 环境变量格式&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&amp;emsp;&amp;emsp;例如我们经常用的PATH变量，其格式如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/s...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Oct 10, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/php/2014/10/10/DebianApacheSetting.html">Debian下Apache配置多域名访问</a>
+        </h4>
+          <p>
+              &lt;p&gt;&amp;emsp;&amp;emsp;当有些服务器需要服务多个域名时，Apache需要对不同域名过来的请求进行区分，这时需要用到&lt;strong&gt;Apache的多域名配置&lt;/strong&gt;技术。&lt;br&gt;
+&amp;emsp;&amp;emsp;其实很简单，只要修改Apache的配置文件，在Debian系统中默认的路径是&lt;code&gt;/etc/apache2/sites-available/default&lt;/code&gt;，打开该文件，会看见如下类似结构：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;V...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Oct 6, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/10/06/CleanCode.html">《Clean Code》重点内容总结</a>
+        </h4>
+          <p>
+              &lt;blockquote&gt;
+&lt;h3&gt;1.    有意义的命名&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对变量、方法命好名的关键在于：&lt;br&gt;
+1)  名副其实，能够通过名称知道变量、方法的作用意义；&lt;br&gt;
+2)  避免误导，选用变量（方法）真实含义，并需要有意义地区分不同名称，而非添加数字；&lt;br&gt;
+3)  表达明确，不要让读者“翻译”你的名称，适当添加有意义的语境；&lt;br&gt;
+4)  避免前缀，概念唯一，注意词性；  &lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h4&gt;1.1.   名副其实&lt;/h4&gt;
+
+&lt;p&gt;变量、函数或类的名称应该做到能够所有的大问题，因此，注意命名，一有好的名字就换...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
+    
+      <li>
+        <span class="post-meta pull-right">Oct 4, 2014</span>
+
+        <h4>
+          <a class="post-link" href="/Myblog/reading/2014/10/04/LearningPython.html">《Python学习手册》</a>
+        </h4>
+          <p>
+              &lt;blockquote&gt;
+&lt;h3&gt;1. 数据类型 ###&lt;/h3&gt;
+&lt;/blockquote&gt;
+
+&lt;h4&gt;1.1  序列的+ *运算&lt;/h4&gt;
+
+&lt;p&gt;假设&lt;code&gt;s=”spam”&lt;/code&gt;，&lt;code&gt;s+&amp;#39;xyz&amp;#39;&lt;/code&gt; 为：&lt;code&gt;”spamxyz”&lt;/code&gt;；&lt;code&gt;s*3=”spamspamspam”&lt;/code&gt;
+但+需要保证运算符两边的类型一定，字符串配字符串，列表配列表（&lt;code&gt;[1,2]+[3,4] 输出：[1,2,3,4]&lt;/code&gt;） &lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h4&gt;1.2  切片&lt;/h4&gt;
+
+&lt;p&gt;假...
+          </p>
+          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
+          
+      </li>
     
       <li>
         <span class="post-meta pull-right">Sep 9, 2014</span>
@@ -209,81 +300,6 @@ git commit  -m &amp;quot;first post&amp;quot;&lt;/co...
           
       </li>
     
-      <li>
-        <span class="post-meta pull-right">Aug 28, 2014</span>
-
-        <h4>
-          <a class="post-link" href="/Myblog/backup/2014/08/28/gitcommands.html">Git常用命令总结</a>
-        </h4>
-          <p>
-              &lt;h2&gt;目录&lt;/h2&gt;
-
-&lt;p&gt;&lt;span style=&quot;line-height: 30px;&quot;&gt;
-&lt;a href=&quot;#t1&quot;&gt;1. Git创建及初始化: clone, init, remote&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;#t2&quot;&gt;2. 仓库中的文件操作: add, rm&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;#t3&quot;&gt;3. 提交修改内容: comit&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;#t4&quot;&gt;4. 与远程仓库的交互通信: push, pull, fetch, merge, diff&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;#t5&quot;&gt;5. 版本标签操作相关命令: tag&lt;/a&gt;&lt;br&gt;
-...
-          </p>
-          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
-          
-      </li>
-    
-      <li>
-        <span class="post-meta pull-right">Aug 25, 2014</span>
-
-        <h4>
-          <a class="post-link" href="/Myblog/reading/2014/08/25/readingtest5.html">测试文章14</a>
-        </h4>
-          <p>
-              &lt;h2&gt;测试文章14&lt;/h2&gt;
-
-&lt;p&gt;person of interests中文的 的&lt;/p&gt;
-
-&lt;p&gt;25 Aug 2014&lt;/p&gt;
-
-          </p>
-          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
-          
-      </li>
-    
-      <li>
-        <span class="post-meta pull-right">Aug 24, 2014</span>
-
-        <h4>
-          <a class="post-link" href="/Myblog/reading/2014/08/24/readingtest4.html">测试文章13</a>
-        </h4>
-          <p>
-              &lt;h2&gt;测试文章13&lt;/h2&gt;
-
-&lt;p&gt;person of interests中文的 的&lt;/p&gt;
-
-&lt;p&gt;24 Aug 2014&lt;/p&gt;
-
-          </p>
-          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
-          
-      </li>
-    
-      <li>
-        <span class="post-meta pull-right">Aug 23, 2014</span>
-
-        <h4>
-          <a class="post-link" href="/Myblog/reading/2014/08/23/readingtest3.html">测试文章12</a>
-        </h4>
-          <p>
-              &lt;h2&gt;测试文章12&lt;/h2&gt;
-
-&lt;p&gt;person of interests中文的 的&lt;/p&gt;
-
-&lt;p&gt;23 Aug 2014&lt;/p&gt;
-
-          </p>
-          <hr style="border:0px; background-color:rgba(176, 194, 204, 0.4); height:1px;" />
-          
-      </li>
-    
   </ul>
     
     <ul>
@@ -292,7 +308,7 @@ git commit  -m &amp;quot;first post&amp;quot;&lt;/co...
   	</div>
 
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 16:30:59 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-10-11 19:46:13 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

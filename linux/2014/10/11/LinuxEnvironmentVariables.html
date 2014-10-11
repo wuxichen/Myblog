@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>测试文章14</title>
+  <title>Linux的环境变量总结</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
 ">
@@ -45,15 +45,48 @@
 
 
   <div id="article">
-   <div class="article-title normalfont">测试文章14</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 25 Aug 2014</small>
+   <div class="article-title normalfont">Linux的环境变量总结</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 11 Oct 2014</small>
        <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
    <div class="post">
-     <h2>测试文章14</h2>
+     <p>&emsp;&emsp;Linux下装一些软件时经常会需要修改环境变量，而对于普通用户和root用户需要修改的文件不同，本文对此进行系统性的总结。
+<br></p>
 
-<p>person of interests中文的 的</p>
+<blockquote>
+<h3>1. 环境变量格式</h3>
+</blockquote>
 
-<p>25 Aug 2014</p>
+<p>&emsp;&emsp;例如我们经常用的PATH变量，其格式如下：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">PATH</span><span class="o">=</span>/usr/bin/:/usr/sbin/ ..
+
+<span class="c"># 或者 若需要表示自增操作</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/bin/ ...</code></pre></div>
+
+<blockquote>
+<h3>2. 不同的用户环境变量的位置</h3>
+</blockquote>
+
+<p>1） 系统中的用户工作环境设置文件：</p>
+
+<ul>
+<li>登录环境设置文件：/etc/profile<br></li>
+<li>非登录环境设置文件：/etc/bashrc</li>
+</ul>
+
+<p>2） 用户个人设置的环境设置文件：</p>
+
+<ul>
+<li>登录环境设置文件: $HOME/.bash_profile   //这个是环境变量设置的地方<br></li>
+<li>非登录环境设置文件：$HOME/.bashrc       //这个是定义别名的地方</li>
+</ul>
+
+<p><span class="redfont">登录环境：</span>指用户登录系统后的工作环境<br>
+<span class="redfont">非登录环境：</span>指用户再调用子shell时所使用的用户环境</p>
+
+<p>&emsp;&emsp;即处于不同的状态，需要作用的环境配置文件也不同，一般推荐使用<code>/etc/profile</code>这个配置文件。</p>
+
+<p>&emsp;&emsp;另外，每次修改过环境配置文件后，需要输入命令<code>source [文件完整目录]</code>，令其生效。</p>
 
    </div>
  </div>
@@ -64,10 +97,8 @@
 
  <ul class="pager">
   
-  <li class="previous"><a href="/Myblog/reading/2014/08/24/readingtest4.html">&larr; Older</a></li>
+  <li class="previous"><a href="/Myblog/php/2014/10/10/DebianApacheSetting.html">&larr; Older</a></li>
   
-  
-  <li class="next"><a href="/Myblog/backup/2014/08/28/gitcommands.html">Newer &rarr;</a></li>
   
 
 </ul>
@@ -89,7 +120,7 @@
     </ul>
     </div>
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 16:30:59 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-10-11 19:46:13 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

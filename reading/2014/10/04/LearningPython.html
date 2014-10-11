@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>《Python学习手册》</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+">
+  <link href="/Myblog/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Myblog/css/hc.css" rel="stylesheet">
+  <link href="/Myblog/css/pygments.css" rel="stylesheet">
+  <link href="/Myblog/css/font-awesome.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif] d-->
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+       <!-- Sidebar -->
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand"><a href="/Myblog/"><h1 class="brand">Gray's Blog</h1></a><h3 class="description">这里是一位准程序员的博客，我将在这里记录近期工作以及编程相关的读书笔记
+</h3></li>
+          <hr />
+          <li><a href="/Myblog/"><span class="normalfont">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a></li>
+          <li><a href="/Myblog/list.html"><span class="normalfont">文章列表</span></a></li>
+          <li><a href="/Myblog/categories/reading/"><span class="normalfont">读书笔记</span></a></li>
+          <li><a href="/Myblog/projects.html"><span class="normalfont">项目列表</span></a></li>
+          <li><a href="/Myblog/about.html"><span class="normalfont">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;于</span></a></li>
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="http://weibo.com/xgray"><i class="fa fa-weibo"></i> weibo</a> </li>
+           <li> <a href="https://github.com/wuxichen"><i class="fa fa-github-square"></i> github</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+
+  <div id="article">
+   <div class="article-title normalfont">《Python学习手册》</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 04 Oct 2014</small>
+       <span class="label label-back"><a href="javascript:history.go(-1)" target=_self>返回</a></span></p> <hr/>
+   <div class="post">
+     <blockquote>
+<h3>1. 数据类型 ###</h3>
+</blockquote>
+
+<h4>1.1  序列的+ *运算</h4>
+
+<p>假设<code>s=”spam”</code>，<code>s+&#39;xyz&#39;</code> 为：<code>”spamxyz”</code>；<code>s*3=”spamspamspam”</code>
+但+需要保证运算符两边的类型一定，字符串配字符串，列表配列表（<code>[1,2]+[3,4] 输出：[1,2,3,4]</code>） </p>
+
+<p><br></p>
+
+<h4>1.2  切片</h4>
+
+<p>假设<code>s=”abcde”</code>，<code>s[1:3]=”bc”，s[1:-1]=”bcd”</code>     </p>
+
+<p><br></p>
+
+<h4>1.3  模式匹配</h4>
+
+<p>re.match(模式串，带匹配的字符串)，若未匹配到则返回None，否则返回match，如下所示使用：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&#39;/(.*)/(.*)&#39;</span><span class="p">,</span><span class="s">&#39;/user/home&#39;</span><span class="p">)</span>
+<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span> 
+<span class="c"># 输出：(&#39;user&#39;,&#39;home&#39;)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>1.4  字符串操作</h4>
+
+<h4>1.4.1  基本操作</h4>
+
+<p>1)  连接：+，重复：*，取长度：len(字符串)<br>
+2)  判断stra是否在strb中：字符串stra in 字符串strb<br>
+3)  转换为字符串：str(数字)<br>
+4)  ASCII码与字符的转换：ord(字符)，chr(ASCII码)  </p>
+
+<h4>1.4.2  分片，索引</h4>
+
+<p>示意图：</p>
+
+<p>扩展分片：
+X[i: j: k] 表示：从偏移i到偏移j-1，每个k个取一次元素</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;0123456789abcde&#39;</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>        <span class="c"># 输出：1357</span>
+<span class="n">s</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>         <span class="c"># 输出：02468ace</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c"># 输出：543</span></code></pre></div>
+
+<h4>1.4.3  修改字符串</h4>
+
+<p>1)  替换 .replace(匹配字符串，替换成)：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;splot&#39;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;pl&#39;</span><span class="p">,</span> <span class="s">&#39;pamal&#39;</span><span class="p">)</span>
+<span class="c"># 输出s：spamalot</span></code></pre></div>
+
+<p>2)  格式化：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="s">&#39;That is </span><span class="si">%d</span><span class="s"> </span><span class="si">%s</span><span class="s"> bird!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span>
+<span class="s">&#39;That is {0} {1} bird!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;dead&#39;</span><span class="p">)</span>
+<span class="s">&#39;That is {number} {color} bird&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">})</span></code></pre></div>
+
+<p>左对齐、补零、数字位数、小数点后位数</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="s">&#39;</span><span class="si">%+08.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="mf">2.3456</span>        <span class="c"># 输出：&#39;+0002.35&#39;</span></code></pre></div>
+
+<h4>1.4.4 查找与组合</h4>
+
+<p>1)  字符串查找：.find(字符串)  返回第一次出现的索引</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;abcabc&#39;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>       <span class="c"># 输出：2</span></code></pre></div>
+
+<p>2)  数组合成字符串：&#39;连接符&#39;.join(数组)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">]</span>
+<span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>        <span class="c"># 输出：&#39;123&#39;</span></code></pre></div>
+
+<p>3)  字符串分割成数组：.split(分隔符)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;a b c&#39;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>      <span class="c">#　输出：[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]</span></code></pre></div>
+
+<p><br></p>
+
+<h4>1.5　列表操作</h4>
+
+<p>假设<code>L=[123,&#39;spam&#39;,1.23]</code><br>
+1)  添加元素：append(元素)，insert(索引，元素)，extend(列表)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Ni&#39;</span><span class="p">)</span>
+<span class="c"># 输出L：[123,&#39;spam&#39;,1.23,&#39;Ni&#39;]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="c"># 输出L：[123,9,&#39;spam&#39;,1.23,&#39;Ni&#39;]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="c"># 输出L：[123,&#39;spam&#39;,1.23,5,6]</span></code></pre></div>
+
+<p>2)  查找index(元素)，计数count(元素)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mf">1.23</span><span class="p">)</span>       <span class="c"># 输出：2</span>
+<span class="n">L</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mf">1.23</span><span class="p">)</span>        <span class="c"># 输出：1</span></code></pre></div>
+
+<p>3)  删除元素：pop(索引)，remove(元素)，del 列表[索引]</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c"># 返回：1.23，输出L：[123,&#39;spam&#39;]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="c"># 输出L：[&#39;spam&#39;]</span></code></pre></div>
+
+<p>4)  排序sort()，反转reverse()</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">]</span>
+<span class="n">M</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="c"># 输出M：[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]</span>
+<span class="n">M</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="c"># 输出M：[&#39;c&#39;,&#39;b&#39;,&#39;a&#39;]</span></code></pre></div>
+
+<p>5)  列表解析（字典也有类似的操作）</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">M</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+<span class="n">col2</span> <span class="o">=</span> <span class="p">[</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span> <span class="p">]</span>
+<span class="c"># 输出col2：[2,5,8]</span>
+<span class="n">col2</span> <span class="o">=</span> <span class="p">[</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">]</span>
+<span class="c"># 输出col2：[2,8]</span></code></pre></div>
+
+<p>6)  重复</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="c"># 输出L * 3 ：[4,5,6,4,5,6,4,5,6]</span>
+<span class="c"># 输出[L] * 3：[[4,5,6],[4,5,6],[4,5,6]]</span></code></pre></div>
+
+<p>7)  遍历</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c"># 或采用偏移元素方法enumerate</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">offset</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span><span class="n">value</span><span class="p">)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>1.6 字典操作</h4>
+
+<p>1)  增加：<code>D[键] =值</code><br>
+2)  删除 ：<code>del D[键]，D.pop(键) 返回：值</code><br>
+3)  keys()函数取出字典的所有键，组成列表</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">D</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">Ks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">Ks</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">Ks</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s">&#39;=&gt;&#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="c"># 输出：</span>
+<span class="c"># a=&gt;1</span>
+<span class="c"># b=&gt;2</span>
+<span class="c"># c=&gt;3</span></code></pre></div>
+
+<p>4)  判断是否存在键 in (has_key在3.x中无法用)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;f&#39;</span> <span class="ow">in</span> <span class="n">D</span> <span class="p">:</span>
+    <span class="c">#…</span></code></pre></div>
+
+<p>5)  获取值get(键，不存在时候的默认值)</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">D</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+<span class="c"># 输出：1</span></code></pre></div>
+
+<p>6)  字典解析</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">D</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span> <span class="nb">zip</span><span class="p">([</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="p">)</span>
+<span class="c"># 输出D：{&#39;a&#39;:1, &#39;b&#39;:2, &#39;c&#39;:3}</span>
+<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">*</span><span class="mi">4</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s">&#39;SPAM&#39;</span><span class="p">}</span>
+<span class="c"># 输出D：{&#39;A&#39;:&#39;AAAA&#39;,&#39;P&#39;:&#39;PPPP&#39;,&#39;S&#39;:&#39;SSSS&#39;,&#39;M&#39;:&#39;MMMM&#39;}</span>
+<span class="n">D</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">([</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c"># 输出D：{&#39;a&#39;:0,&#39;b&#39;:0,&#39;c&#39;:0}</span></code></pre></div>
+
+<p>7)  排序：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">])</span></code></pre></div>
+
+<p>8)  遍历：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">D</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>1.7 元组操作</h4>
+
+<p>假设T=(1,2,3,4)
+1)  index(元素) 查找，返回下标</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">T</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c"># 输出：3</span></code></pre></div>
+
+<p>2)  count(元素) 计算元素出现次数</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">T</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c"># 输出：1</span></code></pre></div>
+
+<p>3)  注意：(40)是一个数，而(40,)才是元组
+<br></p>
+
+<h4>1.8 集合操作</h4>
+
+<p>1)  并集 |，交集 &amp;，差 -，异或 ^，子集&lt;与超集&gt;
+    union(set(..)), intersection(set(..)), issubset(..), issuperset(..)
+2)  增加add(一个元素)，update(set(..)) </p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">z</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;d&#39;</span><span class="p">])</span>
+<span class="n">z</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;spam&#39;</span><span class="p">)</span>
+<span class="c"># 输出z：set([&#39;b&#39;,&#39;d&#39;,&#39;spam&#39;])</span>
+<span class="n">z</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">]))</span>
+<span class="c"># 输出z：set([&#39;x&#39;,&#39;y&#39;, &#39;b&#39;,&#39;d&#39;,&#39;spam&#39;])</span></code></pre></div>
+
+<p><br></p>
+
+<blockquote>
+<h3>2. 基础语法</h3>
+</blockquote>
+
+<h4>2.1    赋值：</h4>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="s">&#39;x1&#39;</span><span class="p">,</span> <span class="s">&#39;x2&#39;</span>
+<span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s">&#39;spam&#39;</span>
+<span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="n">string</span><span class="p">[</span><span class="mi">2</span><span class="p">:]]</span>
+<span class="c"># 输出a,b,c：(&#39;s&#39;,&#39;p&#39;.&#39;am&#39;)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>2.2    循环else</h4>
+
+<p>while 循环条件 :<br>
+&emsp;if 条件 :<br>
+&emsp;&emsp;break<br>
+else :<br>
+&emsp;当最后没有执行过break时，就执行的部分（即使第一次也不满足循环条件时也执行） </p>
+
+<p>例如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">while</span> <span class="n">x</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">match</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;Not found&#39;</span><span class="p">)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>2.3    关于range</h4>
+
+<p>格式：range(起始整数，结束整数(不包括)，步长)
+非完备遍历：
+    for i in range(0,len(s),2):...
+等价于：<code>for c in s[::2]:...</code></p>
+
+<p><br></p>
+
+<h4>2.4    并行遍历及函数式编程</h4>
+
+<h4>2.4.1  zip</h4>
+
+<p>zip会取得一个或多个序列作为参数，然后返回元组的列表，将这些序列中的并排元素配成对。
+例如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">L2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">))</span>
+<span class="c"># 输出为：[(1,5),(2,6),(3,7),(4,8)]</span></code></pre></div>
+
+<p>又如，构造字典：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">))</span>
+<span class="c"># 输出为：{1:5,2:6,3:7,4:8}</span></code></pre></div>
+
+<h4>2.4.2 map</h4>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s1</span> <span class="o">=</span> <span class="s">&#39;abc&#39;</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s">&#39;xyz1&#39;</span>
+<span class="nb">map</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<span class="c"># 输出：[(a,x),(b,y),(c,z),(None,1)]（仅限2.x版本，3.x已与zip一致） </span>
+
+<span class="k">def</span> <span class="nf">mymap</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">10</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">mymap</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+<span class="c"># 输出：[11,12,13]</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">))</span>
+<span class="c"># 输出：[(a,x),(b,y),(c,z)]</span></code></pre></div>
+
+<h4>2.4.3  filter</h4>
+
+<p>用测试函数过滤出一些元素</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">list</span><span class="p">(</span> <span class="nb">filter</span><span class="p">((</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="p">)</span>
+<span class="c"># 输出：[1,2,3,4]</span></code></pre></div>
+
+<h4>2.4.4  reduce</h4>
+
+<p>每对元素都应用函数并运行到最后结果</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">reduce</span><span class="p">((</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="c"># 输出：10</span></code></pre></div>
+
+<p><br></p>
+
+<h4>2.5 传参数</h4>
+
+<p>1)  对于不可变对象，通过“值”传递：如整数、字符串这样的对象，无法修改，效果如同创建了一份拷贝；<br>
+2)  对于可变对象，通过“指针”传递：如列表、字典这样的对象，能够在函数内部进行原处修改；<br>
+3)  参数匹配顺序：<br>
+<strong>位置、指定变量名、*name、</strong>name、默认值**</p>
+
+<p><br></p>
+
+<blockquote>
+<h3>3. Python表达式操作符</h3>
+</blockquote>
+
+<h4>3.1 生成匿名函数 lamba</h4>
+
+<p>格式：<code>lamba args: expression</code>
+该表达式创建了一个之后能够调用的函数，并返回，但不是将这个函数赋值给变量。  </p>
+
+<p>1)  简单例子：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">lower</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="p">:</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="k">else</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">lower</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="c"># 输出：&#39;a&#39;</span></code></pre></div>
+
+<p>2)  与函数的一个典型例子：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">knights</span><span class="p">():</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Sir&#39;</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">title</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">action</span>
+
+    <span class="n">act</span> <span class="o">=</span> <span class="n">knights</span><span class="p">()</span>
+    <span class="n">act</span><span class="p">(</span><span class="s">&#39;robin&#39;</span><span class="p">)</span>
+<span class="c"># 输出：Sir robin</span></code></pre></div>
+
+<p>3)  典型应用：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">key</span> <span class="o">=</span> <span class="s">&#39;got&#39;</span>
+<span class="p">{</span><span class="s">&#39;already&#39;</span><span class="p">:(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span>
+<span class="s">&#39;got&#39;</span><span class="p">:(</span><span class="k">lambda</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="p">),</span>
+<span class="s">&#39;one&#39;</span><span class="p">:(</span><span class="k">lambda</span><span class="p">:</span><span class="mi">2</span><span class="o">**</span><span class="mi">6</span><span class="p">)}[</span><span class="n">key</span><span class="p">]()</span>
+<span class="c"># 输出：8</span></code></pre></div>
+
+<h4>3.2 三元选择表达式 x if y else z</h4>
+
+<p>如果满足条件y，则为x，否则为z
+例如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">test</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">test</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">3</span>
+<span class="c"># 输出result：3</span></code></pre></div>
+
+<h4>3.3 取整与截断取整</h4>
+
+<p>math.trunc(数字) 去除小数部分，变整型<br>
+math.floor(数字) 舍去法，还是浮点型</p>
+
+<blockquote>
+<h3>4. 生成器函数</h3>
+</blockquote>
+
+<p>yield可以编写送回一个值并随后从其退出的地方继续的函数，拥有yield的函数称为生成器函数。</p>
+
+<p>1)  简单应用：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">gensquares</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gensquares</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+<span class="c"># 输出：0 1 4 9 16</span></code></pre></div>
+
+<p>gensquares(4)等价于生成器表达式：(x ** 2 for x in range(4))</p>
+
+<p>2)  生成器函数可以用next()获得下一个值
+如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="n">gensquares</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c"># 输出：0</span></code></pre></div>
+
+<p>3)  扩展生成器函数协议send</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">i</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">gen</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="c"># 输出：0</span>
+
+<span class="n">G</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">77</span><span class="p">)</span>
+<span class="c"># 输出：77</span>
+<span class="mi">1</span></code></pre></div>
+
+<blockquote>
+<h3>5. Python中的变量引用</h3>
+</blockquote>
+
+<h4>5.1 共享引用</h4>
+
+<h4>5.1.1 简单变量的共享引用</h4>
+
+<p>a = 3<br>
+b = a<br>
+则b指向a指向的单元（即：整数3）<br>
+当a = a + 2后，a指向了整数5的单元，而b的指向不变，依旧为3  </p>
+
+<h4>5.1.2 复合变量的共享引用</h4>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> 
+<span class="n">L2</span> <span class="o">=</span> <span class="n">L1</span>
+<span class="n">L1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">24</span></code></pre></div>
+
+<p>则这时L1与L2同时引用[1,2,3]，对L1[0]的修改，是在原处修改，不会重新创建一个新的列表对象，因此，结果<br>
+<code>输出L1：[24, 2, 3]</code>
+<code>输出L2：[24, 2, 3]</code></p>
+
+<p>若需要L1的修改不影响L2，则在赋值L2时需要拷贝对象：<br>
+<code>L2 = L1[:]</code>
+若是字典或元组则需要
+<code>L2 = copy.copy(L1)</code>
+<code>L2 = copy.deepcopy(L1)</code></p>
+
+<p><br></p>
+
+<h4>5.2 判断变量是否相等</h4>
+
+<p>== 是值的相等判断，而 is是否指向同一个对象的判断，如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">L</span> <span class="o">==</span> <span class="n">M</span>     <span class="c"># 输出：True</span>
+<span class="n">L</span> <span class="ow">is</span> <span class="n">M</span>        <span class="c"># 输出：False</span>
+
+<span class="c"># 而小的整数与字符串，因缓存机制，以上都会输出True</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">43</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">43</span>
+<span class="n">L</span> <span class="o">==</span> <span class="n">M</span>     <span class="c"># 输出：True</span>
+<span class="n">L</span> <span class="ow">is</span> <span class="n">M</span>        <span class="c"># 输出：True</span></code></pre></div>
+
+<blockquote>
+<h3>6. 文件操作</h3>
+</blockquote>
+
+<h4>6.1 打开文件</h4>
+
+<p>file = open(路径，标示)，标示&#39;r&#39; -- 读取，&#39;w&#39; -- 写入，&#39;a&#39; -- 追加</p>
+
+<p><br></p>
+
+<h4>6.2 使用文件</h4>
+
+<p>1)  读取一行.readline()，若到文件尾则返回空字符串</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span> <span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c"># 还可以用文件迭代器</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>   <span class="c"># 去除尾部的换行符</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></div>
+
+<p>2)  读取全部内容：.read() -- 成一个字符串, .readlines() -- 成一个列表<br>
+3)  写入内容：.write(字符串)<br>
+4)  在文件中存储python高级对象：<br>
+存数据结构：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="n">F</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;datafile.pkl&#39;</span><span class="p">,</span><span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+<span class="n">F</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></div>
+
+<p>取数据结构：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">F</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;datafile.pkl&#39;</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>  <span class="c"># 此时E为上面的字典</span></code></pre></div>
+
+<blockquote>
+<h3>7. 模块</h3>
+</blockquote>
+
+<h4>7.1 模块导入方法</h4>
+
+<p>1)  import
+使一个变量名引用整个模块对象，因此需要通过模块名称来得到该模块的属性，该方式比后两种更加安全，但需要冗长的模块名，如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module1</span>
+<span class="n">module1</span><span class="o">.</span><span class="n">printer</span><span class="p">(</span><span class="s">&quot;hello world!&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>2)  from <module> import <fun>
+将变量名复制到另一个作用域，因此能够直接在脚本中使用复制后的变量名，而不需要通过模块，如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="n">printer</span>
+<span class="n">printer</span><span class="p">(</span><span class="s">&quot;hello world!&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>from赋值变量名，而不是连接，如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># nested1.py</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="k">def</span> <span class="nf">printer</span><span class="p">():</span> <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c"># nested2.py</span>
+<span class="kn">from</span> <span class="nn">nested1</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">printer</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">88</span>
+<span class="n">printer</span><span class="p">()</span>
+
+<span class="c"># nested2.py 输出：99</span></code></pre></div>
+
+<p>相对导入，. 代表该目录，.. 代表父目录，如：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">string</span>    <span class="c"># 从该目录下加载string模块</span></code></pre></div>
+
+<p>3)  from <module> import *
+当使用*时，会取得模块顶层所有赋了值的变量名的拷贝，也是不需要通过模块名来引用：</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">module1</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">printer</span><span class="p">(</span><span class="s">&quot;hello world!&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><br></p>
+
+<h4>7.2 import导入原理</h4>
+
+<p>程序在第一次导入文件时，会执行如下三个步骤：<br>
+1)  搜索到模块文件<br>
+搜索模块文件的目录是sys.path，其包括：程序主目录，PYTHONPATH环境变量目录，标准链接库目录和.pth文件的内容（存于python安装目录顶层，如C:\Python27）。<br>
+2)  编译成位码<br>
+该步骤生成.pyc文件<br>
+3)  执行模块的代码来创建其所定义的对象<br>
+当程序非第一次导入文件时，会跳过这三个步骤，而只在sys.modules表中提取内存中已经加载的模块对象。  </p>
+
+<p><br></p>
+
+<h4>7.3    模块重载</h4>
+
+<p>由于导入模块只在第一次有效，之后的import则不会有任何变化，若还需要再次导入，则使用reload()方法。</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module</span>
+<span class="c"># 输出：use module printer</span>
+
+<span class="kn">import</span> <span class="nn">module</span>
+<span class="c"># 则不再输出</span>
+
+<span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="nb">reload</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+<span class="c"># 输出：use module printer</span></code></pre></div>
+
+   </div>
+ </div>
+
+
+
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+  
+  <li class="previous"><a href="/Myblog/backup/2014/09/09/JekyllPygments.html">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/Myblog/reading/2014/10/06/CleanCode.html">Newer &rarr;</a></li>
+  
+
+</ul>
+
+  <div id="disqus_thread">
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = ''; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      
+
+    </ul>
+    </div>
+    <footer>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-10-11 19:46:13 +0800  </p>
+    </footer>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/Myblog/js/jquery-1.10.2.min.js"></script>
+    <script src="/Myblog/js/bootstrap.min.js"></script>
+    <script src="/Myblog/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Myblog/js/hc.js"></script>
+</body>
+
+</html>

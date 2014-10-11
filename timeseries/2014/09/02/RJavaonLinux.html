@@ -115,8 +115,12 @@ make
 make install</code></pre></div>
 
 <p>7）若有两个版本的gcc就换成高版本的
-mv 重命名
-cp 将[<span class="redfont">gcc g++ gcj</span>（cpp c++这两个可以忽略）]复制到 /usr/bin</p>
+<span class="redfont">用软链接</span>
+ <code>ln -s gfotran gcc g++ /usr/bin/</code>
+在环境变量中增加：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:<span class="o">(</span>你的gcc路径<span class="o">)</span>gcc/lib/
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/bin/</code></pre></div>
 
 <p><br></p>
 
@@ -223,7 +227,7 @@ Rserve<span class="p">()</span></code></pre></div>
     </ul>
     </div>
     <footer>
-       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-09-09 16:30:59 +0800  </p>
+       <p class="text-muted credit">&copy; 2014 Gray's Blog &middot; copyright-<a href="https://github.com/arnp/herring-cove"> Herring Cove for Jekyll </a>2014-10-11 19:46:13 +0800  </p>
     </footer>
  <!-- Bootstrap core JavaScript-->
     <script src="/Myblog/js/jquery-1.10.2.min.js"></script>

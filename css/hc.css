@@ -90,7 +90,7 @@ code {
 }
 
 li{
-    font-family: 'SourceHanSansCN-Normal';
+    font-family: 'microsoft yahei', 'SourceHanSansCN-Normal';
       font-size: 16px;
       line-height: 30px;
 }
@@ -145,7 +145,7 @@ body
 h1,h2,h3,h4,h5,h6
 {
   /*font-family:"Helvetica Neue", helvetica, "Open Sans", sans-serif;*/
-    font-family: 'SourceHanSansCN-Normal';
+    font-family: 'microsoft yahei', 'SourceHanSansCN-Normal';
   color:#d90006
 }
 h1
@@ -179,7 +179,7 @@ h1 a:hover,h2 a:hover,h3 a:hover,h4 a:hover
 p
 {
   /*font-family:"Helvetica Neue", helvetica, "Open Sans", sans-serif;*/
-    font-family: 'SourceHanSansCN-Normal';
+    font-family: 'microsoft yahei', 'SourceHanSansCN-Normal';
   font-size: 16px;
       line-height: 30px;
 }
@@ -410,8 +410,8 @@ pre
 {
   font-size:3em;
   /*font-family:"Helvetica Neue", helvetica, "Open Sans", sans-serif;*/
-    font-family: 'SourceHanSansCN-Normal';
-  font-weight:bolder;
+    font-family: 'microsoft yahei', 'SourceHanSansCN-Normal';
+  /*font-weight:bolder;*/
   color:#fff;
   text-align:center;
   padding-top:120px;
@@ -497,9 +497,9 @@ pre
   background-color:transparent;
   border:1px solid rgba(255,255,255,.4);
   color:rgba(255,255,255,.8);
-  font-weight:200;
+  font-weight:100;
   /*font-family:"Helvetica Neue", helvetica, "Open Sans", sans-serif;*/
-    font-family: 'SourceHanSansCN-Normal';
+    font-family: 'microsoft yahei', 'SourceHanSansCN-Normal';
 }
 
 .showcase-button:hover
